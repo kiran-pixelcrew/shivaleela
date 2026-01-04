@@ -1,27 +1,15 @@
-import Image from "next/image";
 
-export default function Home() {
+import Navbar from "./components/Navbar";
+
+function page() {
+  
   return (
-    <div className="w-full">
-      <div className="block sm:hidden w-full">
-        <Image
-          className="object-cover w-full h-auto"
-          src={"/Mbanner.png"}
-          width={600}
-          height={300}
-          alt="mobile banner"
-        />
-      </div>
-
-      <div className="hidden sm:block w-full">
-        <Image
-          className="object-cover w-full h-auto"
-          src={"/banner.png"}
-          width={1200}
-          height={400}
-          alt="banner"
-        />
-      </div>
+    <div className="min-h-screen flex flex-col w-full">
+      <Navbar/>
+      <div className="bg-red-600 size-32 w-full h-screen mx-auto"></div>
+      <div className="bg-blue-600 size-32 w-11/12 h-screen mx-auto"></div>
     </div>
   );
 }
+
+export default page;
