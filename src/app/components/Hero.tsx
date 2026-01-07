@@ -45,8 +45,8 @@ const Hero = () => {
             <button
               key={i}
               onClick={() => handleManualChange(i)}
-              className={`h-3 w-3 rounded-full border border-white transition-all ${
-                active === i ? "bg-white scale-110" : "bg-white/40"
+              className={`h-3 w-3 rounded-full transition-all ${
+                active === i ? "bg-cyan-400 scale-110" : "bg-white/40"
               }`}
             />
           ))}
