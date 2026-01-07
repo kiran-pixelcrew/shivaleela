@@ -8,17 +8,17 @@ function Statssection() {
       <div className="text-5xl font-serif">Numbers That Shows What we Are!</div>
       <div className="flex gap-6">
         {[
-          { label: "Students Trained", value: "1500+" },
-          { label: "Core Team", value: "45+" },
-          { label: "Productions", value: "5+" },
-          { label: "Countries", value: "13+" },
+          { label: "Students Trained", value: "1500+", color: "1D6D8D"},
+          { label: "Core Team", value: "45+", color: "FF6F61" },
+          { label: "Productions", value: "5+", color: "1D6D8D" },
+          { label: "Countries", value: "13+", color: "FF6F61" },
         ].map((stat, index) => (
           <div
             key={index}
-            className="text-center border rounded-lg h-fit space-y-5 py-10 px-5 items-start flex flex-col w-1/6 bg-[#e5c8f9]"
+            className="text-center border rounded-lg h-fit space-y-5 py-10 px-5 items-start flex flex-col w-1/6 bg-[#F4F5FF]"
           >
             <p className=" font-semibold text-lg">{stat.label}</p>
-            <h3 className="text-4xl font-bold text-blue-700">{stat.value}</h3>
+            <h3 className={`text-4xl font-bold`} style={{ color: `#${stat.color}` }}>{stat.value}</h3>
           </div>
         ))}
       </div>

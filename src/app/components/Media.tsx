@@ -4,7 +4,7 @@ import React from "react";
 
 function Media() {
   return (
-    <div className="w-11/12 h-screen mx-auto pt-24">
+    <div id="media" className="w-11/12 h-screen mx-auto pt-24">
       <span className="font-serif text-5xl">Media Outreach</span>
       <p className="leading-loose pt-5">
         Shivaleela Cultural Trust boasts a dedicated team of professional
