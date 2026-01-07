@@ -16,7 +16,7 @@ function Navbar() {
     { link: "/#contact", name: "Contact" },
   ];
   return (
-    <nav className=" h-26 w-full flex items-center justify-between px-10 font-semibold text-xl">
+    <nav className="sticky z-10 h-26 top-0 bg-white w-full flex items-center justify-between px-10 font-semibold text-xl">
       <div className="flex space-x-3">
         <Image src={PNG} width={"10"} height={"10"} alt="test" />
         <span className="text-2xl">
@@ -33,6 +33,7 @@ function Navbar() {
             {val.name}
           </Link>
         ))}
+        {pathname}
       </div>
     </nav>
   );
