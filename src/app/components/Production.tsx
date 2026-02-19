@@ -22,11 +22,12 @@ function Production() {
     "Experience folk rhythms brought alive by Bengaluru's finest troupe",
     "Video glimpses available below",
   ];
+
   return (
-    <div className="min-h-screen w-11/12 mx-auto">
-      <div className="pt-20">
-        <span className="text-5xl font-serif">Our Productions</span>
-        <p className="pt-5 leading-loose">
+    <div className="min-h-screen w-full mx-auto pb-20 px-6 md:px-12">
+      <div className="pt-10 md:pt-20">
+        <h2 className="text-3xl md:text-5xl font-serif">Our Productions</h2>
+        <p className="pt-5 leading-loose text-justify text-gray-700">
           Shivaleela Cultural Trust boasts a dedicated team of professional
           artists with over 12 years of national and international stage
           excellence. Led by our visionary founder and supported by esteemed
@@ -34,40 +35,46 @@ function Production() {
           Bharatanatyam, Kathak, Yakshagana, and folk forms.
         </p>
       </div>
+
       <div className="pt-8">
         <Image
           src={ProductionImage}
           alt="Production Image"
-          className="w-full h-[30vh] object-cover rounded-lg"
+          className="w-full h-[30vh] md:h-[40vh] object-cover rounded-lg"
+          priority
         />
       </div>
 
-      <div className="flex w-full pt-10">
-        <div className="w-1/3 space-y-6 mr-16">
+      <div className="flex flex-col lg:flex-row w-full pt-10 gap-10 lg:gap-0">
+
+        <div className="w-full lg:w-1/3 space-y-6 lg:pr-16">
           {leftdetails.map((item) => (
             <div
               key={item.name}
-              className="flex justify-between items-end border-b-2 border-yellow-300 pb-2"
+              className="flex justify-between items-end border-b-2 border-yellow-300 pb-2 hover:bg-yellow-50/50 transition-colors cursor-pointer group"
             >
-              <div className="flex flex-col space-y-2">
-                <span className="text-xl font-medium">{item.name}</span>
+              <div className="flex flex-col space-y-1">
+                <span className="text-lg md:text-xl font-medium">{item.name}</span>
                 <span className="text-sm text-gray-500">{item.year}</span>
               </div>
-              <ArrowDownRight className="mb-1" />
+              <ArrowDownRight className="mb-1 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
             </div>
           ))}
         </div>
 
-        <div className="flex-1 flex flex-col pl-16 border-l-2 border-gray-300 justify-center gap-y-4">
-          <div className="flex flex-col">
-            <span>Siri Gannadam Gelge</span>
-            <span>2024 - 2025</span>
+        <div className="flex-1 flex flex-col lg:pl-16 lg:border-l-2 lg:border-gray-300 justify-center gap-y-4">
+          <div className="flex flex-col pb-2 border-b lg:border-none">
+            <span className="text-2xl font-serif font-semibold text-[#a93328]">Siri Gannadam Gelge</span>
+            <span className="text-gray-500 font-medium">2024 - 2025</span>
           </div>
-          {rightdetails.map((val, idx) => (
-            <li key={idx} className="text-gray-700 leading-relaxed">
-              {val}
-            </li>
-          ))}
+          <ul className="space-y-3 list-none">
+            {rightdetails.map((val, idx) => (
+              <li key={idx} className="text-gray-700 leading-relaxed flex items-start">
+                <span className="mr-2 text-yellow-500">•</span>
+                {val}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

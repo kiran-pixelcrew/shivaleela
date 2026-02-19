@@ -52,11 +52,23 @@ const Hero = () => {
           ))}
         </div>
       </div>
-      <div className="bg-zinc-800/95 w-full h-20 flex items-center justify-center text-white gap-1">
-        Welcome to the
-        <span className="text-yellow-400"> Kalaatatpha - 2025 </span> kannada
-        dance drama production! Join us on 14th & 28th to celebrate!
-        <span className="text-yellow-400">Click here for ticktes</span>
+      <div className="bg-zinc-800/95 w-full min-h-16 flex flex-col md:flex-row items-center justify-center text-white gap-1 p-4 text-center text-sm md:text-base">
+        <span>
+          Welcome to the{" "}
+          <span className="text-yellow-400 font-semibold">
+            Kalaatatpha - 2025
+          </span>{" "}
+          kannada dance drama production!
+        </span>
+        <span>
+          Join us on 14th & 28th to celebrate!
+          <a
+            href="#"
+            className="text-yellow-400 underline ml-1 hover:text-yellow-300 transition-colors"
+          >
+            Click here for tickets
+          </a>
+        </span>
       </div>
     </div>
   );
