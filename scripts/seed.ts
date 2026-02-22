@@ -1,18 +1,7 @@
-// scripts/seed.ts
-
-/**
- * Run ONCE to set up your MongoDB document with admin credentials and empty media array.
- *
- * Usage:
- *   MONGODB_URI=<your_uri> ADMIN_EMAIL=you@example.com ADMIN_PASSWORD=Secret123 \
- *   npx ts-node --compiler-options '{"module":"CommonJS"}' scripts/seed.ts
- */
-
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
 import bcrypt from "bcryptjs";
 
-// load .env variables automatically
 dotenv.config();
 
 const MONGO_URI = process.env.MONGODB_URI!;
@@ -27,9 +16,8 @@ async function seed() {
 
   const client = new MongoClient(MONGO_URI);
   await client.connect();
-  const db = client.db(); // reads DB name from connection string
+  const db = client.db();
 
-  // Ensure admin document is stored in its own collection
   const adminCol = db.collection(ADMIN_COLLECTION);
   const existingAdmin = await adminCol.findOne({ _id: ADMIN_DOC_ID as any });
 
@@ -46,7 +34,6 @@ async function seed() {
     console.log("Created admin document.");
   }
 
-  // Ensure media document exists (empty array) in its own collection
   const mediaCol = db.collection(MEDIA_COLLECTION);
   const existingMedia = await mediaCol.findOne({ _id: MEDIA_DOC_ID as any });
   if (!existingMedia) {
