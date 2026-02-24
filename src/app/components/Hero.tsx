@@ -1,77 +1,36 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
-import Heroo from "@/assets/Hero.png";
-import Image from "next/image";
-import Kathak from "@/assets/Kathak.png";
-import Production from "@/assets/Productionimage.png";
-import Yt from "@/assets/YtThumbnail.png";
 
-const Hero = () => {
-  const [active, setActive] = useState(0);
-  const images = [Heroo, Kathak, Production, Yt];
+import HeroSectionBgCarousel from "./heroSectionBgCarousal";
+import type { StaticImageData } from 'next/image';
 
-  const nextSlide = useCallback(() => {
-    setActive((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  }, [images.length]);
+import imgUrl0 from '@/assets/Hero.png';
+import imgUrl1 from '@/assets/Kathak.png';
+import imgUrl2 from '@/assets/YtThumbnail.png';
+import imgUrl3 from '@/assets/Productionimage.png';
 
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 3000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
+const images: StaticImageData[] = [imgUrl0, imgUrl1, imgUrl2, imgUrl3];
+const mobileImages: StaticImageData[] = [imgUrl0, imgUrl1, imgUrl2, imgUrl3];
 
-  const handleManualChange = (index: number) => {
-    setActive(index);
-  };
+
+export default function Hero() {
   return (
-    <div className="">
-      <div className="relative overflow-hidden w-full">
-        <div
-          className="flex transition-transform duration-500 ease-in-out"
-          style={{ transform: `translateX(-${active * 100}%)` }}
-        >
-          {images.map((img, i) => (
-            <div key={i} className="min-w-full">
-              <Image
-                src={img}
-                alt="Heroo"
-                className="object-fit w-full h-auto"
-              />
-            </div>
-          ))}
-        </div>
+    <section
+      aria-label="Hero Section"
+      className="relative mx-auto w-full items-center justify-center overflow-hidden px-2 md:h-[calc(100vh-100px)] md:px-20"
+    >
+      <div className="absolute inset-0 z-0 hidden md:block">
+        <HeroSectionBgCarousel images={images} interval={4000} />
+      </div>
 
-        <div className="absolute bottom-4 w-full flex justify-center gap-2">
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => handleManualChange(i)}
-              className={`h-3 w-3 rounded-full transition-all ${
-                active === i ? "bg-cyan-400 scale-110" : "bg-white/40"
-              }`}
-            />
-          ))}
+      <div className="px-2">
+        <div className="mt-4 flex md:hidden">
+          <HeroSectionBgCarousel
+            images={mobileImages}
+            interval={2000}
+            className="relative h-[450px] rounded-2xl shadow-xl"
+          />
         </div>
       </div>
-      <div className="bg-zinc-800/95 w-full min-h-16 flex flex-col md:flex-row items-center justify-center text-white gap-1 p-4 text-center text-sm md:text-base">
-        <span>
-          Welcome to the{" "}
-          <span className="text-yellow-400 font-semibold">
-            Kalaatatpha - 2025
-          </span>{" "}
-          kannada dance drama production!
-        </span>
-        <span>
-          Join us on 14th & 28th to celebrate!
-          <a
-            href="#"
-            className="text-yellow-400 underline ml-1 hover:text-yellow-300 transition-colors"
-          >
-            Click here for tickets
-          </a>
-        </span>
-      </div>
-    </div>
+    </section>
   );
-};
-
-export default Hero;
+}

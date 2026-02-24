@@ -9,15 +9,15 @@ import Footer from "./components/Footer";
 
 function page() {
   return (
-    <div className="min-h-screen flex flex-col w-full">
+    <div className="">
       <Navbar />
       <Hero />
       <Aboutus />
       <Statssection />
-      <PerformingTeam/>
-      <Production/>
-      <Media/>
-      <Footer/>
+      <PerformingTeam />
+      <Production />
+      <Media />
+      <Footer />
     </div>
   );
 }

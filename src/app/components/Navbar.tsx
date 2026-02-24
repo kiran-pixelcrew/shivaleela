@@ -1,77 +1,400 @@
-"use client";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import PNG from "../../../public/banner.png";
-import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+'use client';
 
-function Navbar() {
-  const pathname = usePathname();
-  const [activeHash, setActiveHash] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
+import { Menu, X } from 'lucide-react';
+
+const Navbar = () => {
+  const pathname = usePathname() || '';
+  const [hidden, setHidden] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const lastYRef = useRef(0);
+  const rAFRef = useRef<number | null>(null);
+  const hiddenRef = useRef(hidden);
+  // Suppress observer updates during programmatic scrolls (e.g., clicking Home/logo)
+  const suppressObserverRef = useRef(false);
 
   useEffect(() => {
-    setActiveHash(window.location.hash);
-    const handleHashChange = () => setActiveHash(window.location.hash);
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    hiddenRef.current = hidden;
+  }, [hidden]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close mobile menu on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const reduceMotion = mql.matches;
+    const onScroll = () => {
+      if (reduceMotion) return;
+      if (rAFRef.current != null) return;
+      rAFRef.current = window.requestAnimationFrame(() => {
+        const y = window.scrollY || window.pageYOffset;
+        const lastY = lastYRef.current;
+        const shouldHide = y > lastY && y > 100;
+        if (shouldHide !== hiddenRef.current) {
+          setHidden(shouldHide);
+        }
+        lastYRef.current = y;
+        rAFRef.current = null;
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    const onChange = () => {
+      setHidden(false);
+    };
+    mql.addEventListener?.('change', onChange);
+
+    return () => {
+      if (rAFRef.current) cancelAnimationFrame(rAFRef.current);
+      window.removeEventListener('scroll', onScroll);
+      mql.removeEventListener?.('change', onChange);
+    };
   }, []);
 
+  useEffect(() => {
+    const sections = ['projects', 'services', 'contact']
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (suppressObserverRef.current) return; // ignore while suppressed
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries.length > 0) {
+          const mostVisible = visibleEntries[0].target as HTMLElement;
+          const sectionId = mostVisible.id;
+          const newHash = `#${sectionId}`;
+
+          if (window.location.hash !== newHash) {
+            setActiveSection(newHash);
+            window.history.replaceState(null, '', newHash);
+          }
+        } else {
+          const scrollY = window.scrollY || window.pageYOffset;
+          if (scrollY < 100 && window.location.hash) {
+            setActiveSection(null);
+            window.history.replaceState(null, '', '/');
+          }
+        }
+      },
+      {
+        root: null,
+        threshold: [0.2, 0.4, 0.6, 0.8],
+        rootMargin: '-20% 0px -30% 0px',
+      }
+    );
+
+    sections.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const initializeActiveSection = () => {
+      if (typeof window !== 'undefined') {
+        const hash = window.location.hash;
+        if (['#projects', '#services', '#contact'].includes(hash)) {
+          setActiveSection(hash);
+        } else if (pathname === '/') {
+          setActiveSection(null);
+        }
+      }
+    };
+
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (['#projects', '#services', '#contact'].includes(hash)) {
+        setActiveSection(hash);
+      } else {
+        setActiveSection(null);
+      }
+    };
+
+    initializeActiveSection();
+
+    // Handle scroll on initial load or route change if hash is present
+    if (pathname === '/' && window.location.hash) {
+      const hash = window.location.hash;
+      if (['#projects', '#services', '#contact'].includes(hash)) {
+        setTimeout(() => {
+          const element = document.querySelector(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [pathname]);
   const navLinks = [
-    { link: "/", name: "Home" },
-    { link: "/#about-us", name: "About Us" },
-    { link: "/#events", name: "Events" },
-    { link: "/#media", name: "Media" },
-    { link: "/#contact", name: "Contact" },
+    {
+      name: 'Home',
+      link: '/',
+    },
+    {
+      name: 'Projects',
+      link: '/#projects',
+    },
+    {
+      name: 'Services',
+      link: '/#services',
+    },
+    {
+      name: 'Contact',
+      link: '/#contact',
+    },
   ];
-
   return (
-    <nav className="sticky z-50 top-0 bg-white w-full border-b">
-      <div className="max-w-full mx-auto flex items-center justify-between px-4 md:px-10 h-20 md:h-26">
-        <div className="flex items-center space-x-3">
-          <Image src={PNG} width={40} height={40} alt="Logo" className="w-8 h-8 md:w-10 md:h-10" />
-          <span className="text-lg md:text-2xl font-bold leading-tight">
-            Shivaleela Cultural Trust <sup className="text-[10px] md:text-sm">Ⓡ</sup>
-          </span>
-        </div>
+    <nav aria-label="Primary navigation">
+      <div
+        className={`sticky top-0 z-50 h-20 w-full border-b border-gray-50/20 bg-white shadow-xl backdrop-blur-md transition-all duration-300 will-change-transform ${hidden ? 'pointer-events-none -translate-y-28 opacity-0' : 'translate-y-0 opacity-100'}`}
+      >
+        <div className="flex h-full items-center justify-between px-4 md:px-8">
+          <div className="flex items-center text-xl font-bold text-[#1e1e1e] md:text-2xl">
+            <Link
+              href={'/'}
+              className="flex items-center space-x-2"
+              onClick={(e) => {
+                // Prevent default navigation to handle scroll and active state
+                e.preventDefault();
+                suppressObserverRef.current = true;
+                setActiveSection(null);
+                window.history.pushState(null, '', '/');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setMobileMenuOpen(false);
+                // Re-enable observer updates after scroll settles
+                setTimeout(() => {
+                  suppressObserverRef.current = false;
+                }, 500);
+              }}
+            >
+              <Image
+                src={'/logo.svg'}
+                quality={100}
+                alt="logo"
+                width={50}
+                height={100}
+              />
+              <span className="hidden sm:inline">Shivaleela Cultural Trust</span>
+            </Link>
+          </div>
 
-        <div className="hidden lg:flex space-x-8 xl:space-x-14 items-center font-semibold text-lg">
-          {navLinks.map((val) => {
-            const isActive = activeHash === val.link.replace("/", "");
+          {/* Desktop Menu */}
+          <div className="hidden space-x-4 text-sm md:flex md:space-x-8 md:text-base">
+            {navLinks.map((link) => {
+              const isActive = (() => {
+                if (link.link === '/') {
+                  const currentHash =
+                    typeof window !== 'undefined' ? window.location.hash : '';
+                  return pathname === '/' && !currentHash && !activeSection;
+                }
+                if (link.link.startsWith('/#')) {
+                  const hash = link.link.substring(1);
+                  const currentHash =
+                    typeof window !== 'undefined' ? window.location.hash : '';
+                  return (
+                    pathname === '/' &&
+                    (activeSection === hash || currentHash === hash)
+                  );
+                }
+                return pathname === link.link;
+              })();
+
+              const handleClick = (e: React.MouseEvent) => {
+                if (link.link.startsWith('/#')) {
+                  if (pathname === '/') {
+                    e.preventDefault();
+                    const hash = link.link.substring(1);
+                    const targetElement = document.querySelector(hash);
+                    if (targetElement) {
+                      targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                      });
+                      // Delay updating activeSection until scroll finishes
+                      setTimeout(() => {
+                        setActiveSection(hash);
+                        window.history.pushState(null, '', hash);
+                      }, 400); // 400ms for smooth scroll
+                    }
+                  }
+                } else if (link.link === '/') {
+                  e.preventDefault();
+                  suppressObserverRef.current = true;
+                  setActiveSection(null);
+                  window.history.pushState(null, '', '/');
+                  window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                  });
+                  setTimeout(() => {
+                    suppressObserverRef.current = false;
+                  }, 500);
+                }
+              };
+
+              return (
+                <Link
+                  key={link.name}
+                  href={link.link}
+                  onClick={handleClick}
+                  className={`relative cursor-pointer font-bold transition-all duration-300 ease-out hover:text-[#C1FF72] focus:text-[#C1FF72] focus:outline-none ${isActive
+                    ? 'scale-105 text-[#C1FF72]'
+                    : 'text-[#1e1e1e] hover:scale-105'
+                    }`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <span className="relative z-10">{link.name}</span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="flex items-center justify-center text-[#1e1e1e] transition-colors hover:text-[#C1FF72] md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-40 backdrop-blur-lg transition-all duration-300 md:hidden ${mobileMenuOpen
+          ? 'pointer-events-auto opacity-100'
+          : 'pointer-events-none opacity-0'
+          }`}
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        <div
+          className={`flex h-full flex-col items-center justify-center space-y-8 transition-all duration-500 ${mobileMenuOpen
+            ? 'translate-y-0 opacity-100'
+            : '-translate-y-10 opacity-0'
+            }`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {navLinks.map((link, index) => {
+            const isActive = (() => {
+              if (link.link === '/') {
+                const currentHash =
+                  typeof window !== 'undefined' ? window.location.hash : '';
+                return pathname === '/' && !currentHash && !activeSection;
+              }
+              if (link.link.startsWith('/#')) {
+                const hash = link.link.substring(1);
+                const currentHash =
+                  typeof window !== 'undefined' ? window.location.hash : '';
+                return (
+                  pathname === '/' &&
+                  (activeSection === hash || currentHash === hash)
+                );
+              }
+              return pathname === link.link;
+            })();
+
+            const handleMobileClick = (e: React.MouseEvent) => {
+              if (link.link.startsWith('/#')) {
+                if (pathname === '/') {
+                  e.preventDefault();
+                  const hash = link.link.substring(1);
+                  const targetElement = document.querySelector(hash);
+                  if (targetElement) {
+                    setMobileMenuOpen(false);
+                    setTimeout(() => {
+                      targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                      });
+                    }, 300);
+                    setTimeout(() => {
+                      setActiveSection(hash);
+                      window.history.pushState(null, '', hash);
+                    }, 700);
+                  }
+                } else {
+                  setMobileMenuOpen(false);
+                }
+              } else if (link.link === '/') {
+                e.preventDefault();
+                suppressObserverRef.current = true;
+                setActiveSection(null);
+                setMobileMenuOpen(false);
+                window.history.pushState(null, '', '/');
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 300);
+                setTimeout(() => {
+                  suppressObserverRef.current = false;
+                }, 800);
+              }
+            };
+
             return (
               <Link
-                key={val.name}
-                className={`${isActive ? "text-[#a93328]" : "text-black"} hover:text-[#a93328] transition-colors`}
-                href={val.link}
+                key={link.name}
+                href={link.link}
+                onClick={handleMobileClick}
+                className={`group relative text-4xl font-bold transition-all duration-300 ease-out ${isActive ? 'text-[#C1FF72]' : 'text-[#f8f8f8]'
+                  }`}
+                style={{
+                  transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms',
+                }}
+                aria-current={isActive ? 'page' : undefined}
               >
-                {val.name}
+                <span className="relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:text-[#C1FF72]">
+                  {link.name}
+                </span>
+                {/* {isActive && (
+                  <span className="absolute inset-x-0 -bottom-2 h-1 animate-pulse rounded-full bg-[#C1FF72]" />
+                )} */}
               </Link>
             );
           })}
         </div>
-
-        <button className="lg:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
-
-      <div className={`${isOpen ? "block" : "hidden"} lg:hidden bg-white border-t absolute w-full left-0 shadow-lg`}>
-        <div className="flex flex-col p-6 space-y-4 font-semibold text-xl">
-          {navLinks.map((val) => (
-            <Link
-              key={val.name}
-              href={val.link}
-              onClick={() => setIsOpen(false)}
-              className={activeHash === val.link.replace("/", "") ? "text-[#a93328]" : "text-black"}
-            >
-              {val.name}
-            </Link>
-          ))}
-        </div>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

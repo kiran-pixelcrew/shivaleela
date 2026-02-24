@@ -10,11 +10,13 @@ function MediaCard({
   index,
   isAdmin,
   onDelete,
+  isVisible,
 }: {
   url: string;
   index: number;
   isAdmin: boolean;
   onDelete: (url: string) => void;
+  isVisible: boolean;
 }) {
   const [deleting, setDeleting] = useState(false);
 
@@ -37,21 +39,27 @@ function MediaCard({
   }
 
   return (
-    <div className="relative h-75 md:h-125 group rounded-lg overflow-hidden">
+    <div
+      className={`relative h-64 sm:h-72 md:h-80 lg:h-96 group rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        }`}
+      style={{
+        transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
+      }}
+    >
       <Image
         src={url}
         alt={`Media image ${index + 1}`}
         fill
-        className="object-cover"
+        className="object-cover group-hover:scale-110 transition-transform duration-500"
         unoptimized
         loading="eager"
       />
       {isAdmin && (
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-200 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
           <button
             onClick={handleDelete}
             disabled={deleting}
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-red-600/90 hover:bg-red-700 text-white rounded-full p-2.5"
+            className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-red-600/90 hover:bg-red-700 hover:scale-110 text-white rounded-full p-2.5 shadow-lg"
             title="Remove image"
           >
             {deleting ? (
@@ -93,7 +101,7 @@ function AddImageCard({ onUploaded }: { onUploaded: (url: string) => void }) {
   }
 
   return (
-    <div className="relative h-75 md:h-125 rounded-lg border-2 border-dashed border-stone-300 hover:border-amber-700/60 transition-colors duration-200 bg-stone-50 group cursor-pointer">
+    <div className="relative h-64 sm:h-72 md:h-80 lg:h-96 rounded-xl sm:rounded-2xl border-2 border-dashed border-stone-300 hover:border-amber-700/60 transition-all duration-300 bg-stone-50 group cursor-pointer shadow-lg hover:shadow-2xl">
       <input
         ref={inputRef}
         type="file"
@@ -107,13 +115,21 @@ function AddImageCard({ onUploaded }: { onUploaded: (url: string) => void }) {
         className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer gap-3"
       >
         {uploading ? (
-          <Loader2 size={36} className="text-stone-400 animate-spin" strokeWidth={1.5} />
+          <Loader2
+            size={36}
+            className="text-stone-400 animate-spin"
+            strokeWidth={1.5}
+          />
         ) : (
           <>
-            <div className="border-2 border-stone-300 group-hover:border-amber-700/60 rounded-full p-3 transition-colors duration-200">
-              <ImagePlus size={28} className="text-stone-400 group-hover:text-amber-700/70 transition-colors duration-200" strokeWidth={1.5} />
+            <div className="border-2 border-stone-300 group-hover:border-amber-700/60 group-hover:scale-110 rounded-full p-3 transition-all duration-300">
+              <ImagePlus
+                size={28}
+                className="text-stone-400 group-hover:text-amber-700/70 transition-colors duration-300"
+                strokeWidth={1.5}
+              />
             </div>
-            <span className="text-[11px] text-stone-400 group-hover:text-amber-800 tracking-widest uppercase font-light transition-colors duration-200">
+            <span className="text-[11px] text-stone-400 group-hover:text-amber-800 tracking-widest uppercase font-light transition-colors duration-300">
               Add Image
             </span>
           </>
@@ -127,10 +143,46 @@ function Media() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isGridVisible, setIsGridVisible] = useState(false);
+
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+    };
+
+    const headerObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsHeaderVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    const gridObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsGridVisible(true);
+        }
+      });
+    }, observerOptions);
+
+    if (headerRef.current) headerObserver.observe(headerRef.current);
+    if (gridRef.current) gridObserver.observe(gridRef.current);
+
+    return () => {
+      headerObserver.disconnect();
+      gridObserver.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     async function init() {
-
       const res = await fetch("/api/admin/media/upload");
       if (res.ok) {
         const data = await res.json();
@@ -161,32 +213,45 @@ function Media() {
   return (
     <div
       id="media"
-      className="w-full px-6 md:px-12 text-pretty text-justify min-h-screen mx-auto pt-24 pb-12"
+      className="w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 mx-auto py-16 sm:py-20 md:py-24 lg:py-32"
     >
-      <span className="text-3xl md:text-5xl font-serif">Media Outreach</span>
-      <p className="leading-loose pt-5 text-gray-700">
-        Shivaleela Cultural Trust boasts a dedicated team of professional
-        artists with over 12 years of national and international stage
-        excellence. Led by our visionary founder and supported by esteemed board
-        members, each performer brings specialized mastery in Bharatanatyam,
-        Kathak, Yakshagana, and folk forms. Our choreographers craft innovative
-        productions like Punyakoti and Jai Jaganmathe, blending tradition with
-        fresh storytelling. Highly trained dancers ensure every mudra and
-        expression resonates deeply with audiences. This talented collective not
-        only performs but mentors the next generation through Abhyasa classes.
-        Their credentials—prestigious festival appearances and critical
-        acclaim—build unbreakable trust. Meet the faces behind the footwork that
-        captivates rasikas worldwide.
-      </p>
+      <div
+        ref={headerRef}
+        className={`transition-all duration-700 ease-out ${isHeaderVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
+          }`}
+      >
+        <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 block mb-4 sm:mb-5">
+          Media Outreach
+        </span>
+        <p className="leading-relaxed sm:leading-loose text-base sm:text-lg text-gray-700">
+          Shivaleela Cultural Trust boasts a dedicated team of professional
+          artists with over 12 years of national and international stage
+          excellence. Led by our visionary founder and supported by esteemed
+          board members, each performer brings specialized mastery in
+          Bharatanatyam, Kathak, Yakshagana, and folk forms. Our choreographers
+          craft innovative productions like Punyakoti and Jai Jaganmathe,
+          blending tradition with fresh storytelling. Highly trained dancers
+          ensure every mudra and expression resonates deeply with audiences.
+          This talented collective not only performs but mentors the next
+          generation through Abhyasa classes. Their credentials—prestigious
+          festival appearances and critical acclaim—build unbreakable trust.
+          Meet the faces behind the footwork that captivates rasikas worldwide.
+        </p>
+      </div>
 
-      <div className="pt-8 w-full">
+      <div ref={gridRef} className="pt-10 sm:pt-12 md:pt-14 w-full">
         {loading ? (
-          <div className="flex justify-center py-16">
-            <Loader2 size={32} className="text-stone-400 animate-spin" strokeWidth={1.5} />
+          <div className="flex justify-center py-16 sm:py-20">
+            <Loader2
+              size={32}
+              className="text-stone-400 animate-spin"
+              strokeWidth={1.5}
+            />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 w-full">
             {!showPlaceholders &&
               images.map((url, i) => (
                 <MediaCard
@@ -195,6 +260,7 @@ function Media() {
                   index={i}
                   isAdmin={isAdmin}
                   onDelete={handleDelete}
+                  isVisible={isGridVisible}
                 />
               ))}
 

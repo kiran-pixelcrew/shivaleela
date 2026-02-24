@@ -60,7 +60,7 @@ export default function AdminLogin() {
           <p className="text-[10px] tracking-[0.35em] text-stone-400 uppercase mb-3">
             Shivaleela Cultural Trust
           </p>
-          <h1 className="text-4xl font-serif text-stone-800 mb-3">
+          <h1 className="text-4xl  text-stone-800 mb-3">
             Admin Portal
           </h1>
           <div className="flex items-center justify-center gap-3">
