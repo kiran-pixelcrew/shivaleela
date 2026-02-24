@@ -72,7 +72,7 @@ const About = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center md:text-left font-bold mb-4 sm:mb-5 md:mb-6 text-gray-900 leading-tight">
           Shivaleela Cultural Trust That Speaks!
         </h1>
-        <p className="text-base sm:text-lg md:text-lg text-gray-700 leading-relaxed max-w-5xl">
+        <p className="text-base sm:text-lg md:text-lg text-gray-700 leading-relaxed max-w-full">
           Shivaleela Cultural Trust, Bengaluru&apos;s premier dance troupe, delivers 12+ years of performance excellence on national and international stages. Unique concepts, original music, and innovative choreography in classical (Bharatanatyam, Kathak) and folk forms convey profound messages. Meet our founder, board, and professional artists.
         </p>
       </div>

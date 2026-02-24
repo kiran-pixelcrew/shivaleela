@@ -52,13 +52,13 @@ function Statssection() {
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 py-16 sm:py-20 md:py-24 lg:py-32 space-y-12 sm:space-y-14 md:space-y-16 lg:space-y-20">
+    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 py-16 sm:py-20 md:py-24 lg:py-32 flex flex-col space-y-12">
       {/* Header */}
       <div
         ref={headerRef}
         className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 transition-all duration-700 ease-out ${isHeaderVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-8"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-8"
           }`}
       >
         Numbers That Shows What we Are!
@@ -67,9 +67,9 @@ function Statssection() {
       {/* Stats Grid */}
       <div
         ref={statsRef}
-        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 transition-all duration-700 ease-out ${isStatsVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-8"
+        className={`grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 transition-all duration-700 ease-out ${isStatsVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-8"
           }`}
       >
         {[
@@ -102,8 +102,8 @@ function Statssection() {
       <div
         ref={descRef}
         className={`text-gray-700 leading-relaxed sm:leading-loose font-medium text-base sm:text-lg transition-all duration-700 ease-out ${isDescVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-8"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-8"
           }`}
       >
         Shivaleela Cultural Trust&apos;s 12+ years of excellence in innovative
@@ -120,8 +120,8 @@ function Statssection() {
       <div
         ref={videoRef}
         className={`transition-all duration-700 ease-out ${isVideoVisible
-            ? "opacity-100 scale-100"
-            : "opacity-0 scale-95"
+          ? "opacity-100 scale-100"
+          : "opacity-0 scale-95"
           }`}
       >
         <div className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 group">
@@ -139,8 +139,8 @@ function Statssection() {
       <div
         ref={classesRef}
         className={`flex flex-col space-y-6 sm:space-y-7 md:space-y-8 transition-all duration-700 ease-out ${isClassesVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-8"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-8"
           }`}
       >
         <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
