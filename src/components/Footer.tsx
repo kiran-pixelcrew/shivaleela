@@ -1,6 +1,7 @@
 "use client";
 
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
 function Footer() {
@@ -51,7 +52,7 @@ function Footer() {
 
         <div className="lg:col-span-2">
           <span className="text-yellow-400 font-semibold text-xl sm:text-2xl block mb-3 sm:mb-4">
-            Gaana Nritya Academy
+            Shivaleela Cultural Trust
           </span>
           <ul className="space-y-1 text-sm sm:text-base text-gray-300">
             <li>Tharangini Raktheshwari,</li>
@@ -138,9 +139,14 @@ function Footer() {
         className={`w-full max-w-7xl mx-auto mt-10 sm:mt-12 pt-6 sm:pt-8 px-4 sm:px-6 md:px-8 lg:px-12 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 transition-all duration-700 ease-out delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
       >
-        <p className="text-gray-500 text-xs sm:text-sm text-center md:text-left">
-          © {new Date().getFullYear()} Gaana Nritya Academy. All rights reserved.
-        </p>
+        <div className="flex flex-col gap-2 text-center md:text-left">
+          <p className="text-gray-500 text-xs sm:text-sm">
+            © {new Date().getFullYear()} Shivaleela Cultural Trust. All rights reserved.
+          </p>
+          <p className="text-gray-500 text-xs sm:text-sm">
+            Design and developed by <Link href={"https://pixelcrew.in/"} target="_blank"> <span className="text-yellow-400 font-semibold">pixelcrew</span></Link>
+          </p>
+        </div>
         <div className="flex gap-4 sm:gap-6 text-yellow-400">
           {socialLinks.map(({ Icon, label }, index) => (
             <Icon
@@ -154,7 +160,7 @@ function Footer() {
           ))}
         </div>
       </div>
-    </footer>
+    </footer >
   );
 }
 
