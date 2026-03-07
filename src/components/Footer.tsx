@@ -59,10 +59,10 @@ function Footer() {
             <li>Nagar Kottara Chowki, Mangaluru,</li>
             <li>Karnataka - 575006</li>
             <li className="font-semibold pt-2 text-white hover:text-yellow-400 transition-colors cursor-pointer">
-              9986563999
+              +91 1234567890
             </li>
             <li className="hover:text-yellow-400 transition-colors cursor-pointer">
-              gaananritya@gmail.com
+              shivaleelaculturaltrust@gmail.com
             </li>
           </ul>
         </div>

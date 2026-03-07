@@ -126,7 +126,6 @@ function Statssection() {
       >
         <div className="relative overflow-hidden rounded-lg sm:rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 group">
           <iframe className="w-full aspect-video" src="https://www.youtube.com/embed/4WVz3zGJ7c8?si=U17GDvlBEafS8jNq" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
         </div>
       </div>
 

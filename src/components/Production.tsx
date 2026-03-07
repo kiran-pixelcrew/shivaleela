@@ -1,158 +1,134 @@
 "use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import ProductionImage from "@/assets/Productionimage.png";
-import { ArrowDownRight } from "lucide-react";
 
-function Production() {
-  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
-  const [isImageVisible, setIsImageVisible] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
+const caseStudies = [
+  {
+    id: 1,
+    title: "Priya Found Her Voice",
+    year: "2007-2008",
+    content: `Children today face a host of challenges that threaten their emotional, physical, and mental well-being. Bullying, sexual abuse, cyber threats, and addiction are just a few of the growing issues facing them. These dangers can feel overwhelming and isolating for children, leaving them and their families unsure of how to respond or where to turn for help.
 
-  const headerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+At Vakya Foundation, we believe the solution lies in prevention and awareness. Rather than waiting for the harm to occur, we intervene early with targeted, effective programs designed to educate and empower. Our mission is to arm every child, from the age of 5 to 18, with the knowledge, tools, and support needed to thrive in today's world.`,
+  },
+  {
+    id: 2,
+    title: "Aryan's Safe Online Journey",
+    year: "2007-2008",
+    content: `Aryan was a 12-year-old who loved playing online games and chatting with friends. However, he started receiving strange messages from someone claiming to be his age. The person tried to get personal information and made Aryan uncomfortable.
 
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
-    };
+Through our Chiguru program, Aryan had learned about online safety and the warning signs of cyber predators. He immediately recognized the danger, blocked the person, and reported it to his parents and our support team. His quick action prevented a potentially harmful situation.
 
-    const observers = [
-      { ref: headerRef, setter: setIsHeaderVisible },
-      { ref: imageRef, setter: setIsImageVisible },
-      { ref: contentRef, setter: setIsContentVisible },
-    ];
+This case demonstrates how early education about cyber safety can empower children to protect themselves in the digital world. Aryan's story has been shared (with permission) to help other children recognize similar threats.`,
+  },
+  {
+    id: 3,
+    title: "Teacher's Lives Changed",
+    year: "2007-2008",
+    content: `Ms. Sharma, a school teacher with 15 years of experience, attended our educator training program. She learned to recognize signs of abuse and distress in students that she had previously missed.
 
-    const observerInstances = observers.map(({ ref, setter }) => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setter(true);
-          }
-        });
-      }, observerOptions);
+Within weeks of the training, she noticed changes in a student's behavior - withdrawal, anxiety, and unexplained bruises. Using the protocols she learned, she approached the situation sensitively and helped connect the child with appropriate support services.
 
-      if (ref.current) observer.observe(ref.current);
-      return observer;
-    });
+The intervention led to the child receiving professional help and the family getting counseling. Ms. Sharma now trains other teachers in her school, multiplying the impact of our program. She says, "This training didn't just change my teaching - it gave me tools to change lives."`,
+  },
+  {
+    id: 4,
+    title: "From Fear to Confidence",
+    year: "2007-2008",
+    content: `Meera was a quiet 14-year-old who was being bullied by older students at her school. She was afraid to speak up and started skipping school, leading to declining grades and increasing isolation.
 
-    return () => {
-      observerInstances.forEach((observer) => observer.disconnect());
-    };
-  }, []);
+When our team conducted a workshop at her school, Meera learned about her rights, how to set boundaries, and where to seek help. With support from our counselors and her school, she found the courage to report the bullying.
 
-  const leftdetails = [
-    { name: "Siri Gannadam Gelge", year: "2024 - 2025" },
-    { name: "Jai Jaganmathe", year: "2007 - 2008" },
-    { name: "Punyakoti", year: "2007 - 2008" },
-    { name: "Prakruti", year: "2007 - 2008" },
-    { name: "Colours Of India", year: "2007 - 2008" },
-  ];
+The school took action, the bullying stopped, and Meera slowly regained her confidence. Today, she's a peer mentor in our program, helping other students facing similar challenges. Her transformation from victim to advocate shows the power of timely intervention and support.`,
+  },
+  {
+    id: 5,
+    title: "Riya's Brighter, Safer Smile",
+    year: "2007-2008",
+    content: `Eight-year-old Riya seemed happy at school but was experiencing inappropriate touching from a relative during family visits. She didn't have the words to explain what was happening or understand that it was wrong.
 
-  const rightdetails = [
-    "Captivates with rhythmic footwork and vibrant Karnataka folk energy",
-    "Dynamic choreography blending Yakshagana vigor with classical finesse",
-    "Infectious talas echo village festivities and heroic regional tales",
-    "Professional artists weave intricate patterns of sound and movement",
-    "Honors authentic heritage while thrilling modern audiences",
-    "Rave reviews from prestigious national/international stages",
-    "Experience folk rhythms brought alive by Bengaluru's finest troupe",
-    "Video glimpses available below",
-  ];
+After participating in our age-appropriate personal safety workshop, Riya learned about good touch and bad touch. She recognized what was happening to her and felt empowered to tell her mother, who immediately took action.
+
+The family sought therapy, and appropriate measures were taken to ensure Riya's safety. Her mother later shared, "The workshop gave my daughter the language to tell me what I needed to know. It saved her from further harm." Riya is now thriving and has her bright smile back.`,
+  },
+];
+
+const CaseStudy = () => {
+  const [selectedCase, setSelectedCase] = useState(caseStudies[0]);
 
   return (
-    <div className="w-full max-w-7xl mx-auto py-16 sm:py-20 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-12">
-      <div
-        ref={headerRef}
-        className={`transition-all duration-700 ease-out ${isHeaderVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-8"
-          }`}
-      >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
-          Our Productions
-        </h2>
-        <p className="pt-4 sm:pt-5 leading-relaxed sm:leading-loose text-base sm:text-lg text-gray-700">
-          Shivaleela Cultural Trust boasts a dedicated team of professional
-          artists with over 12 years of national and international stage
-          excellence. Led by our visionary founder and supported by esteemed
-          board members, each performer brings specialized mastery in
-          Bharatanatyam, Kathak, Yakshagana, and folk forms.
-        </p>
-      </div>
-
-      <div
-        ref={imageRef}
-        className={`pt-8 sm:pt-10 md:pt-12 transition-all duration-700 ease-out ${isImageVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
-      >
-        <div className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 group">
+    <section className="w-full py-16 px-4 bg-white">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Banner Image */}
+        <div className="mb-8 rounded-lg overflow-hidden">
           <Image
-            src={ProductionImage}
-            alt="Production Image"
-            className="w-full h-[25vh] sm:h-[30vh] md:h-[35vh] lg:h-[40vh] object-cover"
+            src="/banner.png"
+            alt="Children at Chiguru workshop"
+            width={1200}
+            height={400}
+            className="w-full h-auto object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
         </div>
-      </div>
 
-      <div
-        ref={contentRef}
-        className={`flex flex-col lg:flex-row w-full pt-12 sm:pt-14 md:pt-16 gap-8 sm:gap-10 lg:gap-0 transition-all duration-700 ease-out ${isContentVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-8"
-          }`}
-      >
-        <div className="w-full lg:w-1/3 space-y-5 sm:space-y-6 lg:pr-12 xl:pr-16">
-          {leftdetails.map((item, index) => (
-            <div
-              key={item.name}
-              className="flex justify-between items-end border-b-2 border-yellow-300 pb-2 sm:pb-3 hover:bg-yellow-50/50 transition-all duration-300 cursor-pointer group"
-              style={{
-                transitionDelay: isContentVisible ? `${index * 100}ms` : "0ms",
-              }}
-            >
-              <div className="flex flex-col space-y-1">
-                <span className="text-lg sm:text-xl font-medium text-gray-900 group-hover:text-[#a93328] transition-colors">
-                  {item.name}
-                </span>
-                <span className="text-xs sm:text-sm text-gray-500">
-                  {item.year}
-                </span>
-              </div>
-              <ArrowDownRight className="mb-1 w-5 h-5 sm:w-6 sm:h-6 text-gray-600 group-hover:translate-x-1 group-hover:translate-y-1 group-hover:text-[#a93328] transition-all duration-300" />
+        {/* Case Studies Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Sidebar - Case Study List */}
+          <div className="lg:col-span-1">
+            <div className="space-y-2">
+              {caseStudies.map((caseStudy) => (
+                <div
+                  key={caseStudy.id}
+                  onClick={() => setSelectedCase(caseStudy)}
+                  className={`p-4 rounded-lg  cursor-pointer transition-all duration-200 ${selectedCase.id === caseStudy.id
+                    ? "bg-[#1e1e1e] shadow-md"
+                    : "bg-white border-gray-200 hover:bg-gray-50"
+                    }`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h3
+                        className={`font-semibold text-sm md:text-base mb-1 ${selectedCase.id === caseStudy.id
+                          ? "text-gray-100"
+                          : "text-gray-900"
+                          }`}
+                      >
+                        {caseStudy.title}
+                      </h3>
+                      <p className="text-xs text-gray-500">{caseStudy.year}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-
-        <div className="flex-1 flex flex-col lg:pl-12 xl:pl-16 lg:border-l-2 lg:border-gray-300 justify-center gap-y-4 sm:gap-y-5 md:gap-y-6">
-          <div className="flex flex-col pb-3 sm:pb-4 border-b lg:border-none">
-            <span className="text-2xl sm:text-3xl font-semibold text-[#a93328]">
-              Siri Gannadam Gelge
-            </span>
-            <span className="text-sm sm:text-base text-gray-500 font-medium">
-              2024 - 2025
-            </span>
           </div>
-          <ul className="space-y-3 sm:space-y-4 list-none">
-            {rightdetails.map((val, idx) => (
-              <li
-                key={idx}
-                className="text-gray-700 text-base sm:text-lg leading-relaxed flex items-start">
-                <span className="mr-2 sm:mr-3 text-yellow-500 font-bold">•</span>
-                <span>{val}</span>
-              </li>
-            ))}
-          </ul>
+
+          {/* Right Content - Selected Case Study Details */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg p-6 border-l-4 border-[#FFD45C] shadow-sm">
+              <div className="mb-4 pb-4 border-b-2 border-[#FFD45C]">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                  {selectedCase.title}
+                </h3>
+                <p className="text-sm text-gray-500">Read time - 3 min</p>
+              </div>
+              <div className="prose prose-gray max-w-none">
+                {selectedCase.content.split("\n\n").map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="text-gray-700 text-sm md:text-base leading-relaxed mb-4"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
-export default Production;
+export default CaseStudy;

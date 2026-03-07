@@ -18,6 +18,12 @@ export default function Hero() {
       aria-label="Hero Section"
       className="relative mx-auto w-full items-center justify-center overflow-hidden px-2 md:h-[calc(100vh-100px)] md:px-20"
     >
+        <p
+          className="absolute left-1/2 leading-26  top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center"
+          style={{ color: 'transparent', fontSize: '8rem', fontWeight: 'bold', WebkitTextStroke: '2px white', textTransform: 'uppercase' }}
+        >
+          Shivaleela Cultural Trust
+        </p>
       <div className="absolute inset-0 z-0 hidden md:block">
         <HeroSectionBgCarousel images={images} interval={4000} />
       </div>
