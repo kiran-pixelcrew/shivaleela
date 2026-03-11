@@ -4,6 +4,7 @@ import Image from "next/image";
 import Shantala from "@/assets/Shantala.png";
 import Parimila from "@/assets/Parimila.png";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "./ui/button";
 
 const About = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
@@ -59,7 +60,7 @@ const About = () => {
   return (
     <div
       id="about-us"
-      className="mx-auto flex flex-col max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 sm:py-20 md:py-24 lg:py-32"
+      className="mx-auto flex flex-col max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 sm:py-20 md:py-24 lg:py-10"
     >
       {/* Header Section */}
       <div
@@ -69,11 +70,10 @@ const About = () => {
           : "opacity-0 translate-y-8"
           }`}
       >
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl md:text-left font-bold mb-4 sm:mb-5 md:mb-6 text-gray-900 leading-tight">
-          Shivaleela Cultural <br />Trust That Speaks!
-        </h1>
-        <p className="text-base sm:text-lg md:text-lg text-gray-700 leading-relaxed max-w-full">
-          Shivaleela Cultural Trust, Bengaluru&apos;s premier dance troupe, delivers 12+ years of performance excellence on national and international stages. Unique concepts, original music, and innovative choreography in classical (Bharatanatyam, Kathak) and folk forms convey profound messages. Meet our founder, board, and professional artists.
+        <p className="text-base sm:text-lg md:text-base text-justify text-gray-700 leading-relaxed max-w-full">
+          Founded in 2013 by Kum. M.S. Shantala—our visionary President and guru—Shivaleela Natyalaya began as a sanctuary for Bharatanatyam and Indian classical arts. Evolving into Shivaleela Cultural Trust in 2014, we educate children in dance, music, and culture, prioritizing those who can&apos;t afford it.
+          Non-commercial at heart, we nurture talent, stage enchanting performances, and collaborate with event organizers, artists, and communities in Bengaluru. Join our timeless journey—affordable classes, inclusive productions, pure passion.
+          Discover Bharatanatyam classes Bengaluru | Indian classical dance trust.
         </p>
       </div>
 
@@ -100,34 +100,21 @@ const About = () => {
 
         <div className="w-full lg:flex-1 space-y-4 sm:space-y-5 md:space-y-6 flex flex-col justify-center">
           <div className="mb-2 sm:mb-3 md:mb-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              Guru. Shantala Mam
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">
+              Kum. MS Shantala - Star of Silver Screen & Stage
             </h2>
-            <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-600 italic">
-              Founder Shantala Cultural Trust, Actress, Director.
+            <p className="text-sm md:text-base font-semibold text-gray-600 italic">
+              Founder, President & Master Guru.
             </p>
           </div>
 
-          <div className="text-gray-700 text-left space-y-4 sm:space-y-5 md:space-y-6 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+          <div className="text-gray-700 text-sm md:text-base text-justify">
             <p>
-              Shivaleela Cultural Trust&apos;s 12+ years of excellence in innovative
-              classical and folk productions like{" "}
-              <span className="text-[#a93328] font-semibold">Punyakoti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Prakruti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Jai Jaganmathe</span> and our
-              recent <span className="text-[#a93328] font-semibold">Sirigannadam Gelge</span>{" "}
-              make it a Bengaluru cultural powerhouse, deserving a website that
-              showcases artistry while driving enrollments and event attendance.
+              Iconic Kannada actress turned dance visionary Kum. M.S. Shantala starred in 18+ films, debuting with Paduvarahalli Pandavaru alongside Ambareesh under Puttanna Kanagal. Trained by gurus like Vidushi Narmada and Udupi Lakshminarayanacharya, she promotes Bharatanatyam globally in Singapore, USA, and Dubai. Blending cinema, art, and Indian culture, she now inspires the next generation through Shivaleela.
             </p>
-            <p>
-              Excellence in innovative classical and folk productions like{" "}
-              <span className="text-[#a93328] font-semibold">Punyakoti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Prakruti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Jai Jaganmathe</span> and our
-              recent <span className="text-[#a93328] font-semibold">Sirigannadam Gelge</span>{" "}
-              make it a Bengaluru cultural powerhouse, deserving a website that
-              showcases artistry while driving enrollments and event attendance.
-            </p>
+            {/* <Button className="mt-4 bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">
+              Discover Her Journey
+            </Button> */}
           </div>
         </div>
       </div>
@@ -155,33 +142,17 @@ const About = () => {
 
         <div className="w-full lg:flex-1 space-y-4 sm:space-y-5 md:space-y-6 flex flex-col justify-center">
           <div className="mb-2 sm:mb-3 md:mb-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              Guru. Parimila Mam
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-2">
+              Kum. Parimala Subodh
             </h2>
-            <p className="text-base sm:text-lg md:text-xl font-semibold text-gray-600 italic">
-              Co-Founder, Board Member Shivaleela Cultural Trust
+            <p className="text-sm md:text-base font-semibold text-gray-600 italic">
+              Artistic Director & Co-Founder.
             </p>
           </div>
 
-          <div className="text-gray-700 space-y-4 sm:space-y-5 md:space-y-6 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
+          <div className="text-gray-700 text-sm md:text-base text-balance">
             <p>
-              Shivaleela Cultural Trust&apos;s 12+ years of excellence in innovative
-              classical and folk productions like{" "}
-              <span className="text-[#a93328] font-semibold">Punyakoti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Prakruti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Jai Jaganmathe</span> and our
-              recent <span className="text-[#a93328] font-semibold">Sirigannadam Gelge</span>{" "}
-              make it a Bengaluru cultural powerhouse, deserving a website that
-              showcases artistry while driving enrollments and event attendance.
-            </p>
-            <p>
-              Excellence in innovative classical and folk productions like{" "}
-              <span className="text-[#a93328] font-semibold">Punyakoti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Prakruti</span>,{" "}
-              <span className="text-[#a93328] font-semibold">Jai Jaganmathe</span> and our
-              recent <span className="text-[#a93328] font-semibold">Sirigannadam Gelge</span>{" "}
-              make it a Bengaluru cultural powerhouse, deserving a website that
-              showcases artistry while driving enrollments and event attendance.
+              A Bharatanatyam expert and freestyle folk dancer currently pursuing Kathak, actively involved in managing both on-stage and off-stage operations including lighting, costumes, choreography, and full productions. Oversees workshops, classes, and Shivaleela events while promoting young artists with Shantala, driven by a deep passion for music, dance, and creative artistic concepts.
             </p>
           </div>
         </div>

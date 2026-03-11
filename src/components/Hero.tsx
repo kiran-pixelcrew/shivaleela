@@ -3,38 +3,59 @@
 import HeroSectionBgCarousel from "./heroSectionBgCarousal";
 import type { StaticImageData } from 'next/image';
 
-import imgUrl0 from '@/assets/Hero.png';
-import imgUrl1 from '@/assets/Kathak.png';
-import imgUrl2 from '@/assets/YtThumbnail.png';
-import imgUrl3 from '@/assets/Productionimage.png';
+import imgUrl0 from '@/assets/hero/img0.png';
+import imgUrl1 from '@/assets/hero/img1.png';
+import imgUrl2 from '@/assets/hero/img2.png';
+import imgUrl3 from '@/assets/hero/img3.png';
+import imgUrl4 from '@/assets/hero/img4.png';
+import imgUrl5 from '@/assets/hero/img5.png';
+import imgUrl6 from '@/assets/hero/img6.png';
+import imgUrl7 from '@/assets/hero/img7.png';
 
-const images: StaticImageData[] = [imgUrl0, imgUrl1, imgUrl2, imgUrl3];
+
+const images: StaticImageData[] = [imgUrl0, imgUrl1, imgUrl2, imgUrl3, imgUrl4, imgUrl5, imgUrl6, imgUrl7];
 const mobileImages: StaticImageData[] = [imgUrl0, imgUrl1, imgUrl2, imgUrl3];
 
 
 export default function Hero() {
   return (
-    <section
-      aria-label="Hero Section"
-      className="relative mx-auto w-full items-center justify-center overflow-hidden px-2 md:h-[calc(100vh-100px)] md:px-20"
-    >
-        <p
-          className="absolute left-1/2 leading-26  top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center"
-          style={{ color: 'transparent', fontSize: '8rem', fontWeight: 'bold', WebkitTextStroke: '2px white', textTransform: 'uppercase' }}
-        >
-          Shivaleela Cultural Trust
-        </p>
-      <div className="absolute inset-0 z-0 hidden md:block">
-        <HeroSectionBgCarousel images={images} interval={4000} />
+    <section aria-label="Hero Section" className="flex flex-col w-full h-[calc(100vh-80px)] md:h-[calc(100vh-90px)] min-h-[550px]">
+      {/* Top Carousel Section */}
+      <div className="relative w-full grow overflow-hidden hidden md:block">
+        <HeroSectionBgCarousel
+          images={images}
+          interval={4000}
+          className="h-full! w-full object-cover"
+        />
       </div>
 
-      <div className="px-2">
-        <div className="mt-4 flex md:hidden">
-          <HeroSectionBgCarousel
-            images={mobileImages}
-            interval={2000}
-            className="relative h-[450px] rounded-2xl shadow-xl"
-          />
+      <div className="relative w-full grow overflow-hidden flex md:hidden">
+        <HeroSectionBgCarousel
+          images={mobileImages}
+          interval={2000}
+          className="h-full! w-full object-cover"
+        />
+      </div>
+
+      {/* Bottom Content Section */}
+      <div className="mx-auto flex w-full shrink-0 flex-col items-center justify-center bg-white px-4 py-8 md:py-10 lg:py-12 text-center">
+        <h1 className="mb-3 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium tracking-tight text-gray-900">
+          Shivaleela Cultural Trust Igniting Souls Through Dance
+        </h1>
+        <p className="mb-6 max-w-3xl text-sm md:text-base text-gray-700">
+          Discover the rhythm of tradition and innovation.{' '}
+          <span className="text-primary italic font-medium">
+            We teach, perform, and produce
+          </span>{' '}
+          captivating stories in Bharatanatyam and beyond. Join the dance & Musical celebrations!
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button className="rounded-md bg-secondary px-6 md:px-8 py-2.5 md:py-3 text-xs md:text-sm font-semibold text-secondary-foreground transition-colors hover:bg-secondary/90 shadow-md uppercase">
+            Enroll Classes
+          </button>
+          <button className="rounded-md border-2 border-secondary bg-transparent px-6 md:px-8 py-2.5 md:py-3 text-xs md:text-sm font-semibold text-secondary transition-colors hover:bg-secondary hover:text-secondary-foreground shadow-sm uppercase">
+            Book a Performance
+          </button>
         </div>
       </div>
     </section>

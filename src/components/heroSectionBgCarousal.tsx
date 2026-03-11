@@ -76,7 +76,7 @@ const HeroSectionBgCarousel: React.FC<HeroSectionBgCarouselProps> = ({
         return (
           <div
             key={`carousel-image-${index}`}
-            className="absolute inset-0 h-full w-full bg-cover bg-center transition-opacity duration-1000"
+            className="absolute inset-0 h-full bg-cover w-full bg-no-repeat transition-opacity duration-1000"
             data-lazy={index !== currentImageIndex ? imageUrl : undefined}
             style={{
               opacity: index === currentImageIndex ? 1 : 0,

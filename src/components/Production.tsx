@@ -82,7 +82,7 @@ const CaseStudy = () => {
                   key={caseStudy.id}
                   onClick={() => setSelectedCase(caseStudy)}
                   className={`p-4 rounded-lg  cursor-pointer transition-all duration-200 ${selectedCase.id === caseStudy.id
-                    ? "bg-[#1e1e1e] shadow-md"
+                    ? "bg-secondary shadow-md"
                     : "bg-white border-gray-200 hover:bg-gray-50"
                     }`}
                 >
@@ -106,8 +106,8 @@ const CaseStudy = () => {
 
           {/* Right Content - Selected Case Study Details */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg p-6 border-l-4 border-[#FFD45C] shadow-sm">
-              <div className="mb-4 pb-4 border-b-2 border-[#FFD45C]">
+            <div className="bg-white rounded-lg p-6 border-l-4 border-primary shadow-sm">
+              <div className="mb-4 pb-4 border-b-2 border-primary">
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                   {selectedCase.title}
                 </h3>

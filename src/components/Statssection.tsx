@@ -73,14 +73,14 @@ function Statssection() {
           }`}
       >
         {[
-          { label: "Students Trained", value: "1500+", color: "#1D6D8D" },
-          { label: "Core Team", value: "45+", color: "#FF6F61" },
-          { label: "Productions", value: "5+", color: "#1D6D8D" },
-          { label: "Countries", value: "13+", color: "#FF6F61" },
+          { label: "Students Trained", value: "1500+", colorClass: "text-secondary" },
+          { label: "Core Team", value: "45+", colorClass: "text-primary" },
+          { label: "Productions", value: "5+", colorClass: "text-secondary" },
+          { label: "Countries", value: "13+", colorClass: "text-primary" },
         ].map((stat, index) => (
           <div
             key={index}
-            className="text-left border border-gray-200 rounded-xl h-fit space-y-4 sm:space-y-5 py-6 sm:py-7 md:py-8 px-6 sm:px-6 flex flex-col bg-[#F4F5FF] shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            className="text-left border border-gray-200 rounded-xl h-fit space-y-4 sm:space-y-5 py-6 sm:py-7 md:py-8 px-6 sm:px-6 flex flex-col bg-secondary/5 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             style={{
               transitionDelay: isStatsVisible ? `${index * 100}ms` : "0ms",
             }}
@@ -89,8 +89,7 @@ function Statssection() {
               {stat.label}
             </p>
             <h3
-              className="text-3xl sm:text-4xl md:text-5xl font-bold"
-              style={{ color: `#${stat.color}` }}
+              className={`text-3xl sm:text-4xl md:text-5xl font-bold ${stat.colorClass}`}
             >
               {stat.value}
             </h3>
@@ -108,10 +107,10 @@ function Statssection() {
       >
         Shivaleela Cultural Trust&apos;s 12+ years of excellence in innovative
         classical and folk productions like{" "}
-        <span className="text-[#a93328] font-semibold">Punyakoti</span>,{" "}
-        <span className="text-[#a93328] font-semibold">Prakruti</span>,{" "}
-        <span className="text-[#a93328] font-semibold">Jai Jaganmathe</span> and our recent{" "}
-        <span className="text-[#a93328] font-semibold">Sirigannadam Gelge</span> make it a
+        <span className="text-primary font-semibold">Punyakoti</span>,{" "}
+        <span className="text-primary font-semibold">Prakruti</span>,{" "}
+        <span className="text-primary font-semibold">Jai Jaganmathe</span> and our recent{" "}
+        <span className="text-primary font-semibold">Sirigannadam Gelge</span> make it a
         Bengaluru cultural powerhouse, deserving a website that showcases
         artistry while driving enrollments and event attendance.
       </div>

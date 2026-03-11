@@ -167,12 +167,12 @@ const Navbar = () => {
       link: '/',
     },
     {
-      name: 'Projects',
-      link: '/#projects',
+      name: 'About Us',
+      link: '/#about-us',
     },
     {
-      name: 'Services',
-      link: '/#services',
+      name: 'Productions',
+      link: '/#productions',
     },
     {
       name: 'Contact',
@@ -185,7 +185,7 @@ const Navbar = () => {
         className={`sticky top-0 z-50 h-20 w-full border-b border-gray-50/20 bg-white shadow-xl backdrop-blur-md transition-all duration-300 will-change-transform ${hidden ? 'pointer-events-none -translate-y-28 opacity-0' : 'translate-y-0 opacity-100'}`}
       >
         <div className="flex h-full items-center justify-between px-4 md:px-8">
-          <div className="flex items-center text-xl font-bold text-[#1e1e1e] md:text-2xl">
+          <div className="flex items-center text-xl font-bold text-secondary md:text-2xl">
             <Link
               href={'/'}
               className="flex items-center space-x-2"
@@ -272,9 +272,9 @@ const Navbar = () => {
                   key={link.name}
                   href={link.link}
                   onClick={handleClick}
-                  className={`relative cursor-pointer font-bold transition-all duration-300 ease-out hover:text-[#C1FF72] focus:text-[#C1FF72] focus:outline-none ${isActive
-                    ? 'scale-105 text-[#C1FF72]'
-                    : 'text-[#1e1e1e] hover:scale-105'
+                  className={`relative cursor-pointer font-bold transition-all duration-300 ease-out hover:text-primary focus:text-primary focus:outline-none ${isActive
+                    ? 'scale-105 text-primary'
+                    : 'text-secondary hover:scale-105'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -286,7 +286,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="flex items-center justify-center text-[#1e1e1e] transition-colors hover:text-[#C1FF72] md:hidden"
+            className="flex items-center justify-center text-secondary transition-colors hover:text-primary md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
@@ -375,18 +375,18 @@ const Navbar = () => {
                 key={link.name}
                 href={link.link}
                 onClick={handleMobileClick}
-                className={`group relative text-4xl font-bold transition-all duration-300 ease-out ${isActive ? 'text-[#C1FF72]' : 'text-[#f8f8f8]'
+                className={`group relative text-4xl font-bold transition-all duration-300 ease-out ${isActive ? 'text-primary' : 'text-[#f8f8f8]'
                   }`}
                 style={{
                   transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms',
                 }}
                 aria-current={isActive ? 'page' : undefined}
               >
-                <span className="relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:text-[#C1FF72]">
+                <span className="relative z-10 transition-all duration-300 group-hover:scale-110 group-hover:text-primary">
                   {link.name}
                 </span>
                 {/* {isActive && (
-                  <span className="absolute inset-x-0 -bottom-2 h-1 animate-pulse rounded-full bg-[#C1FF72]" />
+                  <span className="absolute inset-x-0 -bottom-2 h-1 animate-pulse rounded-full bg-primary" />
                 )} */}
               </Link>
             );

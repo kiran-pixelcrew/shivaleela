@@ -59,7 +59,7 @@ function MediaCard({
           <button
             onClick={handleDelete}
             disabled={deleting}
-            className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-red-600/90 hover:bg-red-700 hover:scale-110 text-white rounded-full p-2.5 shadow-lg"
+            className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-primary/90 hover:bg-primary hover:scale-110 text-white rounded-full p-2.5 shadow-lg"
             title="Remove image"
           >
             {deleting ? (
@@ -101,7 +101,7 @@ function AddImageCard({ onUploaded }: { onUploaded: (url: string) => void }) {
   }
 
   return (
-    <div className="relative h-64 sm:h-72 md:h-80 lg:h-96 rounded-xl sm:rounded-2xl border-2 border-dashed border-stone-300 hover:border-amber-700/60 transition-all duration-300 bg-stone-50 group cursor-pointer shadow-lg hover:shadow-2xl">
+    <div className="relative h-64 sm:h-72 md:h-80 lg:h-96 rounded-xl sm:rounded-2xl border-2 border-dashed border-stone-300 hover:border-primary/60 transition-all duration-300 bg-stone-50 group cursor-pointer shadow-lg hover:shadow-2xl">
       <input
         ref={inputRef}
         type="file"
@@ -122,14 +122,14 @@ function AddImageCard({ onUploaded }: { onUploaded: (url: string) => void }) {
           />
         ) : (
           <>
-            <div className="border-2 border-stone-300 group-hover:border-amber-700/60 group-hover:scale-110 rounded-full p-3 transition-all duration-300">
+            <div className="border-2 border-stone-300 group-hover:border-primary/60 group-hover:scale-110 rounded-full p-3 transition-all duration-300">
               <ImagePlus
                 size={28}
-                className="text-stone-400 group-hover:text-amber-700/70 transition-colors duration-300"
+                className="text-stone-400 group-hover:text-primary/70 transition-colors duration-300"
                 strokeWidth={1.5}
               />
             </div>
-            <span className="text-[11px] text-stone-400 group-hover:text-amber-800 tracking-widest uppercase font-light transition-colors duration-300">
+            <span className="text-[11px] text-stone-400 group-hover:text-primary tracking-widest uppercase font-light transition-colors duration-300">
               Add Image
             </span>
           </>

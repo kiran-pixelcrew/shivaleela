@@ -40,7 +40,7 @@ function Footer() {
     <footer
       ref={footerRef}
       id="contact"
-      className="bg-[#212122] py-12 sm:py-14 md:py-16 text-white"
+      className="bg-secondary py-12 sm:py-14 md:py-16 text-white"
     >
       <div
         className={`w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 px-4 sm:px-6 md:px-8 lg:px-12 gap-8 sm:gap-10 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -51,17 +51,17 @@ function Footer() {
         </div>
 
         <div className="lg:col-span-2">
-          <span className="text-yellow-400 font-semibold text-xl sm:text-2xl block mb-3 sm:mb-4">
+          <span className="text-primary font-semibold text-xl sm:text-2xl block mb-3 sm:mb-4">
             Shivaleela Cultural Trust
           </span>
           <ul className="space-y-1 text-sm sm:text-base text-gray-300">
             <li>Tharangini Raktheshwari,</li>
             <li>Nagar Kottara Chowki, Mangaluru,</li>
             <li>Karnataka - 575006</li>
-            <li className="font-semibold pt-2 text-white hover:text-yellow-400 transition-colors cursor-pointer">
+            <li className="font-semibold pt-2 text-white hover:text-primary transition-colors cursor-pointer">
               +91 1234567890
             </li>
-            <li className="hover:text-yellow-400 transition-colors cursor-pointer">
+            <li className="hover:text-primary transition-colors cursor-pointer">
               shivaleelaculturaltrust@gmail.com
             </li>
           </ul>
@@ -69,7 +69,7 @@ function Footer() {
 
         <div className="lg:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
           <div>
-            <span className="text-yellow-400 font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
+            <span className="text-primary font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
               Classes
             </span>
             <ul className="space-y-2 text-gray-300 text-xs sm:text-sm">
@@ -86,7 +86,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-yellow-400 font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
+            <span className="text-primary font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
               Media
             </span>
             <ul className="space-y-2 text-gray-300 text-xs sm:text-sm">
@@ -101,7 +101,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-yellow-400 font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
+            <span className="text-primary font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
               Events
             </span>
             <ul className="space-y-2 text-gray-300 text-xs sm:text-sm">
@@ -118,7 +118,7 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <span className="text-yellow-400 font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
+            <span className="text-primary font-semibold text-lg sm:text-xl block mb-3 sm:mb-4">
               Home
             </span>
             <ul className="space-y-2 text-gray-300 text-xs sm:text-sm">
@@ -144,10 +144,10 @@ function Footer() {
             © {new Date().getFullYear()} Shivaleela Cultural Trust. All rights reserved.
           </p>
           <p className="text-gray-500 text-xs sm:text-sm">
-            Design and developed by <Link href={"https://pixelcrew.in/"} target="_blank"> <span className="text-yellow-400 font-semibold">pixelcrew</span></Link>
+            Design and developed by <Link href={"https://pixelcrew.in/"} target="_blank"> <span className="text-primary font-semibold">pixelcrew</span></Link>
           </p>
         </div>
-        <div className="flex gap-4 sm:gap-6 text-yellow-400">
+        <div className="flex gap-4 sm:gap-6 text-primary">
           {socialLinks.map(({ Icon, label }, index) => (
             <Icon
               key={label}
