@@ -19,7 +19,7 @@ const mobileImages: StaticImageData[] = [imgUrl0, imgUrl1, imgUrl2, imgUrl3];
 
 export default function Hero() {
   return (
-    <section aria-label="Hero Section" className="flex flex-col w-full h-[calc(100vh-80px)] md:h-[calc(100vh-90px)] min-h-[550px]">
+    <section aria-label="Hero Section" className="flex flex-col w-full h-[calc(100vh-80px)] md:h-[calc(90vh-100px)] ">
       {/* Top Carousel Section */}
       <div className="relative w-full grow overflow-hidden hidden md:block">
         <HeroSectionBgCarousel
@@ -36,7 +36,6 @@ export default function Hero() {
           className="h-full! w-full object-cover"
         />
       </div>
-
       {/* Bottom Content Section */}
       <div className="mx-auto flex w-full shrink-0 flex-col items-center justify-center bg-white px-4 py-8 md:py-10 lg:py-12 text-center">
         <h1 className="mb-3 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium tracking-tight text-gray-900">
