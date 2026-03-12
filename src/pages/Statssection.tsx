@@ -29,7 +29,7 @@ function Statssection() {
       { ref: statsRef, setter: setIsStatsVisible },
       { ref: descRef, setter: setIsDescVisible },
       { ref: videoRef, setter: setIsVideoVisible },
-      
+
     ];
 
     const observerInstances = observers.map(({ ref, setter }) => {
@@ -51,18 +51,7 @@ function Statssection() {
   }, []);
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 py-8 sm:py-20 md:py-24 lg:py-32 flex flex-col space-y-12">
-      {/* Header */}
-      <div
-        ref={headerRef}
-        className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 transition-all duration-700 ease-out ${isHeaderVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-8"
-          }`}
-      >
-        Numbers That Shows What we Are!
-      </div>
-
+    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 py-8 sm:py-10 flex flex-col space-y-12">
       {/* Stats Grid */}
       <div
         ref={statsRef}

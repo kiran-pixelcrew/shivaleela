@@ -1,4 +1,11 @@
 import React from 'react';
+import { Playfair } from 'next/font/google';
+
+const playfair = Playfair({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-playfair',
+  subsets: ['latin'],
+});
 
 interface SectionSeparatorProps {
   title: string;
@@ -14,11 +21,12 @@ const SectionSeparator: React.FC<SectionSeparatorProps> = ({
   return (
     <section
       id={id}
-      className="relative w-full scroll-mt-32 pt-12"
+      style={{ fontFamily: playfair.style.fontFamily }}
+      className="relative w-full pt-12"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-left">
-          <h2 className="mb-4 text-4xl font-bold text-balance text-[#1e1e1e] capitalize sm:text-5xl">
+          <h2 className="text-4xl font-bold text-balance text-[#1e1e1e] capitalize sm:text-5xl">
             {title}
           </h2>
           <p className="mx-auto text-sm tracking-wide text-balance text-[#1e1e1e] opacity-80 sm:text-xl">

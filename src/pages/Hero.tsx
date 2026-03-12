@@ -38,10 +38,10 @@ export default function Hero() {
       </div>
       {/* Bottom Content Section */}
       <div className="mx-auto flex w-full grow flex-col items-center justify-center bg-white px-4 py-8 md:py-10 lg:py-12 text-center">
-        <h1 className="mb-3 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium tracking-tight text-gray-900">
-          Shivaleela Cultural Trust Igniting Souls Through Dance
+        <h1 className=" text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium tracking-tight text-gray-900">
+          Shivaleela Cultural Trust <br /> <span className="text-primary">Igniting Souls Through Dance</span>
         </h1>
-        <p className="mb-6 max-w-3xl text-sm md:text-base text-gray-700">
+        <p className="my-6 max-w-3xl text-sm md:text-base text-gray-700">
           Discover the rhythm of tradition and innovation.{' '}
           <span className="text-primary italic font-medium">
             We teach, perform, and produce
@@ -56,6 +56,9 @@ export default function Hero() {
             Book a Performance
           </button>
         </div>
+      </div>
+      <div className="bg-black py-10 flex items-center justify-center text-center text-white h-10">
+        Welcome to the <span className="text-yellow-400">Kalaatatpha</span> - 2025 kannada dance drama production! Join us on 14th & 28th to celebrate! <span className="text-yellow-400">Click here for Tickets.</span>
       </div>
     </section>
   );

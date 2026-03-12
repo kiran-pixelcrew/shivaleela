@@ -171,8 +171,16 @@ const Navbar = () => {
       link: '/#about-us',
     },
     {
+      name: 'Classes',
+      link: '/#classes',
+    },
+    {
       name: 'Productions',
       link: '/#productions',
+    },
+    {
+      name: 'Gallery',
+      link: '/#gallery',
     },
     {
       name: 'Contact',
@@ -182,35 +190,32 @@ const Navbar = () => {
   return (
     <nav aria-label="Primary navigation">
       <div
-        className={`sticky top-0 z-50 h-20 w-full border-b border-gray-50/20 bg-white shadow-xl backdrop-blur-md transition-all duration-300 will-change-transform ${hidden ? 'pointer-events-none -translate-y-28 opacity-0' : 'translate-y-0 opacity-100'}`}
+        className={`sticky top-0 z-50 h-28 w-full border-b border-gray-50/20 bg-white shadow-xl backdrop-blur-md transition-all duration-300 will-change-transform ${hidden ? 'pointer-events-none -translate-y-28 opacity-0' : 'translate-y-0 opacity-100'}`}
       >
         <div className="flex h-full items-center justify-between px-4 md:px-8">
-          <div className="flex items-center text-xl font-bold text-secondary md:text-2xl">
+          <div className="flex items-center text-xl ml-14 font-bold text-secondary md:text-2xl">
             <Link
               href={'/'}
               className="flex items-center space-x-2"
               onClick={(e) => {
-                // Prevent default navigation to handle scroll and active state
                 e.preventDefault();
                 suppressObserverRef.current = true;
                 setActiveSection(null);
                 window.history.pushState(null, '', '/');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 setMobileMenuOpen(false);
-                // Re-enable observer updates after scroll settles
                 setTimeout(() => {
                   suppressObserverRef.current = false;
                 }, 500);
               }}
             >
               <Image
-                src={'/logo.svg'}
+                src={'/logo.png'}
                 quality={100}
                 alt="logo"
-                width={50}
+                width={80}
                 height={100}
               />
-              <span className="hidden sm:inline">Shivaleela Cultural Trust</span>
             </Link>
           </div>
 

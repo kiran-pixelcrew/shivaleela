@@ -39,7 +39,7 @@ function MediaCard({
 
   return (
     <div
-      className={`relative h-64 sm:h-72 md:h-80 lg:h-96 group rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+      className={`relative h-64 sm:h-72 md:h-80 lg:h-96 overflow-hidden  transition-all duration-500 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       style={{
         transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
@@ -49,7 +49,7 @@ function MediaCard({
         src={url}
         alt={`Media image ${index + 1}`}
         fill
-        className="object-cover group-hover:scale-110 transition-transform duration-500"
+        className="object-contain group-hover:scale-110 transition-transform duration-500"
         unoptimized
         loading="eager"
       />
@@ -212,7 +212,7 @@ function Media() {
   return (
     <div
       id="media"
-      className="w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 mx-auto py-16 sm:py-20 md:py-24 lg:py-32"
+      className="w-full max-w-7xl px-4 sm:px-6 md:px-8 mx-auto py-16 sm:py-10"
     >
       <div
         ref={headerRef}
@@ -221,9 +221,6 @@ function Media() {
           : "opacity-0 translate-y-8"
           }`}
       >
-        <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 block mb-4 sm:mb-5">
-          Media Outreach
-        </span>
         <p className="leading-relaxed sm:leading-loose text-base sm:text-lg text-gray-700">
           Shivaleela Cultural Trust boasts a dedicated team of professional
           artists with over 12 years of national and international stage
@@ -240,7 +237,7 @@ function Media() {
         </p>
       </div>
 
-      <div ref={gridRef} className="pt-10 sm:pt-12 md:pt-14 w-full">
+      <div ref={gridRef} className=" w-full">
         {loading ? (
           <div className="flex justify-center py-16 sm:py-20">
             <Loader2
@@ -250,7 +247,7 @@ function Media() {
             />
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6 w-full">
             {!showPlaceholders &&
               images.map((url, i) => (
                 <MediaCard

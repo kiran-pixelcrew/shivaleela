@@ -3,8 +3,13 @@
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Shanthala from "@/assets/Shantala.png";
+import img0 from "@/assets/gallery/img0.png";
+import img1 from "@/assets/gallery/img1.png";
+import img2 from "@/assets/gallery/img2.png";
+import img3 from "@/assets/gallery/img3.png";
+import img4 from "@/assets/gallery/img4.png";
 
-function PerformingTeam() {
+function Gallery() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   const [isDescVisible, setIsDescVisible] = useState(false);
   const [isGridVisible, setIsGridVisible] = useState(false);
@@ -12,7 +17,7 @@ function PerformingTeam() {
   const headerRef = useRef<HTMLDivElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
-
+  const images = [img0, img1, img2, img3, img4];
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -45,20 +50,11 @@ function PerformingTeam() {
   }, []);
 
   return (
-    <div id="events" className="py-16 sm:py-20 md:py-24 lg:py-32">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        <h2
-          ref={headerRef}
-          className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 transition-all duration-700 ease-out ${isHeaderVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-8"
-            }`}
-        >
-          Talented Performing Team
-        </h2>
+    <div id="events" className="">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <p
           ref={descRef}
-          className={`leading-relaxed sm:leading-loose pt-6 sm:pt-7 md:pt-8 text-base sm:text-lg text-gray-700 transition-all duration-700 ease-out ${isDescVisible
+          className={`pt-6 sm:pt-7 md:pt-8 text-sm text-justify md:text-base text-gray-700 transition-all duration-700 ease-out ${isDescVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-8"
             }`}
@@ -80,24 +76,16 @@ function PerformingTeam() {
 
       <div
         ref={gridRef}
-        className={`w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 pt-8 sm:pt-10 md:pt-12 transition-all duration-700 ease-out ${isGridVisible ? "opacity-100" : "opacity-0"
+        className={`w-full max-w-7xl px-4 sm:px-6 md:px-8 mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 pt-8 sm:pt-10 md:pt-12 transition-all duration-700 ease-out ${isGridVisible ? "opacity-100" : "opacity-0"
           }`}
       >
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div
-            key={index}
-            className="relative overflow-hidden rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
-            style={{
-              transitionDelay: isGridVisible ? `${index * 80}ms` : "0ms",
-            }}
-          >
+        {images.map((url, i) => (
+          <div key={i} className="relative w-full aspect-square rounded-sm overflow-hidden">
             <Image
-              src={Shanthala}
-              alt={`Team member ${index + 1}`}
-              className="w-full h-auto group-hover:scale-110 transition-transform duration-500"
-              priority={index < 4}
+              src={url}
+              alt={`Performing Team ${i + 1}`}
+              className="object-cover object-center w-full h-full transition-transform duration-300 hover:scale-105"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         ))}
       </div>
@@ -105,4 +93,4 @@ function PerformingTeam() {
   );
 }
 
-export default PerformingTeam;
+export default Gallery;

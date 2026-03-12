@@ -65,7 +65,7 @@ const About = () => {
       {/* Header Section */}
       <div
         ref={headerRef}
-        className={`w-full mb-16 sm:mb-18 md:mb-20 lg:mb-24 transition-all duration-700 ease-out ${isHeaderVisible
+        className={`w-full mb-16 sm:mb-18 md:mb-20 lg:mb-8 transition-all duration-700 ease-out ${isHeaderVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-8"
           }`}
@@ -80,7 +80,7 @@ const About = () => {
       {/* Guru Shantala Section */}
       <div
         ref={section1Ref}
-        className={`flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 lg:gap-16 items-center mb-20 sm:mb-24 md:mb-28 lg:mb-32 transition-all duration-700 ease-out ${isSection1Visible
+        className={`flex flex-col lg:flex-row gap-6 sm:gap-8 md:gap-10 lg:gap-16 items-center mb-20 sm:mb-24 md:mb-28 lg:mb-12 transition-all duration-700 ease-out ${isSection1Visible
           ? "opacity-100 translate-x-0"
           : "opacity-0 -translate-x-8"
           }`}
@@ -93,7 +93,7 @@ const About = () => {
               priority
               width={320}
               height={320}
-              className="w-77 h-77 mx-auto sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-lg object-cover shadow-lg transition-transform duration-500 ease-out group-hover:scale-105 group-hover:shadow-2xl"
+              className="w-77 h-77 mx-auto sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[250px] lg:h-[250px] rounded-lg object-cover shadow-lg transition-transform duration-500 ease-out group-hover:scale-105 group-hover:shadow-2xl"
             />
           </div>
         </div>
@@ -108,7 +108,7 @@ const About = () => {
             </p>
           </div>
 
-          <div className="text-gray-700 text-sm md:text-base text-justify">
+          <div className="text-gray-700 text-sm md:text-base text-balance">
             <p>
               Iconic Kannada actress turned dance visionary Kum. M.S. Shantala starred in 18+ films, debuting with Paduvarahalli Pandavaru alongside Ambareesh under Puttanna Kanagal. Trained by gurus like Vidushi Narmada and Udupi Lakshminarayanacharya, she promotes Bharatanatyam globally in Singapore, USA, and Dubai. Blending cinema, art, and Indian culture, she now inspires the next generation through Shivaleela.
             </p>
@@ -122,7 +122,7 @@ const About = () => {
       {/* Guru Parimila Section */}
       <div
         ref={section2Ref}
-        className={`flex flex-col lg:flex-row-reverse gap-6 sm:gap-8 md:gap-10 lg:gap-16 items-center transition-all duration-700 ease-out ${isSection2Visible
+        className={`flex gap-6 sm:gap-8 md:gap-10 lg:gap-16 items-center transition-all duration-700 ease-out ${isSection2Visible
           ? "opacity-100 translate-x-0"
           : "opacity-0 translate-x-8"
           }`}
@@ -135,7 +135,7 @@ const About = () => {
               priority
               width={320}
               height={320}
-              className="w-77 h-77 mx-auto sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-lg object-cover shadow-lg transition-transform duration-500 ease-out group-hover:scale-105 group-hover:shadow-2xl"
+              className="w-77 h-77 mx-auto sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[250px] lg:h-[250px] rounded-lg object-cover shadow-lg transition-transform duration-500 ease-out group-hover:scale-105 group-hover:shadow-2xl"
             />
           </div>
         </div>

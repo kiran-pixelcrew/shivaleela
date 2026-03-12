@@ -1,6 +1,7 @@
 "use client";
 
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -30,10 +31,10 @@ function Footer() {
   }, []);
 
   const socialLinks = [
-    { Icon: Instagram, label: "Instagram" },
-    { Icon: Twitter, label: "Twitter" },
-    { Icon: Linkedin, label: "LinkedIn" },
-    { Icon: Facebook, label: "Facebook" },
+    { Icon: Instagram, label: "Instagram", link: "https://www.instagram.com/shivaleelanatyalaya/" },
+    { Icon: Twitter, label: "Twitter", link: "https://twitter.com/shivaleelanatyalaya" },
+    { Icon: Linkedin, label: "LinkedIn", link: "https://www.linkedin.com/company/shivaleela-cultural-trust" },
+    { Icon: Facebook, label: "Facebook", link: "https://www.facebook.com/shivaleelanatyalaya" },
   ];
 
   return (
@@ -46,8 +47,8 @@ function Footer() {
         className={`w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 px-4 sm:px-6 md:px-8 lg:px-12 gap-8 sm:gap-10 transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
       >
-        <div className="lg:col-span-1">
-          <div className="text-2xl sm:text-3xl font-bold">Logo</div>
+        <div className="lg:col-span-1 flex justify-center items-start ">
+          <Image src={"/logo.png"} alt="logo" width={100} height={100} className="object-cover" />
         </div>
 
         <div className="lg:col-span-2">
@@ -148,15 +149,17 @@ function Footer() {
           </p>
         </div>
         <div className="flex gap-4 sm:gap-6 text-primary">
-          {socialLinks.map(({ Icon, label }, index) => (
-            <Icon
-              key={label}
-              className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-white hover:scale-110 transition-all duration-300"
-              aria-label={label}
-              style={{
-                transitionDelay: isVisible ? `${(index + 4) * 100}ms` : "0ms",
-              }}
-            />
+          {socialLinks.map(({ Icon, label, link }, index) => (
+            <Link key={index} href={link} target="_blank" rel="noopener noreferrer">
+              <Icon
+                key={label}
+                className="w-5 h-5 sm:w-6 sm:h-6 cursor-pointer hover:text-white hover:scale-110 transition-all duration-300"
+                aria-label={label}
+                style={{
+                  transitionDelay: isVisible ? `${(index + 4) * 100}ms` : "0ms",
+                }}
+              />
+            </Link>
           ))}
         </div>
       </div>
