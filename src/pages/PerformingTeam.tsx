@@ -50,8 +50,8 @@ function PerformingTeam() {
         <h2
           ref={headerRef}
           className={`text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 transition-all duration-700 ease-out ${isHeaderVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
             }`}
         >
           Talented Performing Team
@@ -59,8 +59,8 @@ function PerformingTeam() {
         <p
           ref={descRef}
           className={`leading-relaxed sm:leading-loose pt-6 sm:pt-7 md:pt-8 text-base sm:text-lg text-gray-700 transition-all duration-700 ease-out ${isDescVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-8"
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
             }`}
         >
           Shivaleela Cultural Trust boasts a dedicated team of professional

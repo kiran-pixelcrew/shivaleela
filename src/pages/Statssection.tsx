@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
+
 import React, { useEffect, useRef, useState } from "react";
-import YtThumbnail from "@/assets/YtThumbnail.png";
-import Kathak from "@/assets/Kathak.png";
+
 
 function Statssection() {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
@@ -30,7 +29,7 @@ function Statssection() {
       { ref: statsRef, setter: setIsStatsVisible },
       { ref: descRef, setter: setIsDescVisible },
       { ref: videoRef, setter: setIsVideoVisible },
-      { ref: classesRef, setter: setIsClassesVisible },
+      
     ];
 
     const observerInstances = observers.map(({ ref, setter }) => {

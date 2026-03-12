@@ -7,6 +7,7 @@ import Production from "@/pages/Production";
 import Media from "@/pages/Media";
 import Footer from "@/components/Footer";
 import SectionSeparator from "@/components/SectionSeparator";
+import Classes from "@/pages/Classes";
 
 function page() {
   return (
@@ -15,10 +16,12 @@ function page() {
       <Hero />
       <SectionSeparator title="Rhythms of Heritage" subtitle="Where Dance Awakens Souls" id="about-us" />
       <Aboutus />
-      <SectionSeparator title="Abhyaasa: The Sacred Practice" subtitle="Mastery for Every Soul" id="" />
+      <SectionSeparator title="Abhyaasa: The Sacred Practice" subtitle="Mastery for Every Soul" id="classes" />
+      <Classes />
+      <SectionSeparator title="Productions: Dance Narratives" subtitle="Timeless Tales in Motion" id="productions" />
+      <Production />
       <Statssection />
       <PerformingTeam />
-      <Production />
       <Media />
       <Footer />
     </div>

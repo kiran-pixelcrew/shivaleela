@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import ProductionImage from "@/assets/Productionimage.png";
-import { Plus, Trash2, Loader2, ImagePlus } from "lucide-react";
+import { Trash2, Loader2, ImagePlus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 function MediaCard({
@@ -218,8 +217,8 @@ function Media() {
       <div
         ref={headerRef}
         className={`transition-all duration-700 ease-out ${isHeaderVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-8"
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-8"
           }`}
       >
         <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 block mb-4 sm:mb-5">

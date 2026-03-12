@@ -6,16 +6,14 @@ import Image from "next/image";
 const caseStudies = [
   {
     id: 1,
-    title: "Priya Found Her Voice",
-    year: "2007-2008",
-    content: `Children today face a host of challenges that threaten their emotional, physical, and mental well-being. Bullying, sexual abuse, cyber threats, and addiction are just a few of the growing issues facing them. These dangers can feel overwhelming and isolating for children, leaving them and their families unsure of how to respond or where to turn for help.
-
-At Vakya Foundation, we believe the solution lies in prevention and awareness. Rather than waiting for the harm to occur, we intervene early with targeted, effective programs designed to educate and empower. Our mission is to arm every child, from the age of 5 to 18, with the knowledge, tools, and support needed to thrive in today's world.`,
+    title: "Jai Jagannathe",
+    year: "2014",
+    content: `Triumph of the protector—punishing evil, safeguarding the good. Music by Praveen D. Rao.`,
   },
   {
     id: 2,
-    title: "Aryan's Safe Online Journey",
-    year: "2007-2008",
+    title: "Punyakoti",
+    year: "2014",
     content: `Aryan was a 12-year-old who loved playing online games and chatting with friends. However, he started receiving strange messages from someone claiming to be his age. The person tried to get personal information and made Aryan uncomfortable.
 
 Through our Chiguru program, Aryan had learned about online safety and the warning signs of cyber predators. He immediately recognized the danger, blocked the person, and reported it to his parents and our support team. His quick action prevented a potentially harmful situation.
@@ -24,8 +22,8 @@ This case demonstrates how early education about cyber safety can empower childr
   },
   {
     id: 3,
-    title: "Teacher's Lives Changed",
-    year: "2007-2008",
+    title: "Nruthya Bharat",
+    year: "20016",
     content: `Ms. Sharma, a school teacher with 15 years of experience, attended our educator training program. She learned to recognize signs of abuse and distress in students that she had previously missed.
 
 Within weeks of the training, she noticed changes in a student's behavior - withdrawal, anxiety, and unexplained bruises. Using the protocols she learned, she approached the situation sensitively and helped connect the child with appropriate support services.
@@ -34,7 +32,7 @@ The intervention led to the child receiving professional help and the family get
   },
   {
     id: 4,
-    title: "From Fear to Confidence",
+    title: "Ramachacranam & Harikatha",
     year: "2007-2008",
     content: `Meera was a quiet 14-year-old who was being bullied by older students at her school. She was afraid to speak up and started skipping school, leading to declining grades and increasing isolation.
 
@@ -44,8 +42,18 @@ The school took action, the bullying stopped, and Meera slowly regained her conf
   },
   {
     id: 5,
-    title: "Riya's Brighter, Safer Smile",
-    year: "2007-2008",
+    title: "Prakruthi",
+    year: "20018",
+    content: `Eight-year-old Riya seemed happy at school but was experiencing inappropriate touching from a relative during family visits. She didn't have the words to explain what was happening or understand that it was wrong.
+
+After participating in our age-appropriate personal safety workshop, Riya learned about good touch and bad touch. She recognized what was happening to her and felt empowered to tell her mother, who immediately took action.
+
+The family sought therapy, and appropriate measures were taken to ensure Riya's safety. Her mother later shared, "The workshop gave my daughter the language to tell me what I needed to know. It saved her from further harm." Riya is now thriving and has her bright smile back.`,
+  },
+  {
+    id: 6,
+    title: "Siri Gannadam Gelge",
+    year: "20025",
     content: `Eight-year-old Riya seemed happy at school but was experiencing inappropriate touching from a relative during family visits. She didn't have the words to explain what was happening or understand that it was wrong.
 
 After participating in our age-appropriate personal safety workshop, Riya learned about good touch and bad touch. She recognized what was happening to her and felt empowered to tell her mother, who immediately took action.
@@ -57,21 +65,14 @@ The family sought therapy, and appropriate measures were taken to ensure Riya's 
 const CaseStudy = () => {
   const [selectedCase, setSelectedCase] = useState(caseStudies[0]);
 
-  return (
-    <section className="w-full py-16 px-4 bg-white">
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        {/* Banner Image */}
-        <div className="mb-8 rounded-lg overflow-hidden">
-          <Image
-            src="/banner.png"
-            alt="Children at Chiguru workshop"
-            width={1200}
-            height={400}
-            className="w-full h-auto object-cover"
-            priority
-          />
-        </div>
+  const wordCount = selectedCase.content.trim().split(/\s+/).filter(Boolean).length;
+  const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
+  return (
+    <section className="w-full py-8 px-4 bg-white max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <p className="text-lg mb-4">Shivaleela Natyalaya crafts enchanting productions blending myth, morality, and nature.
+        Each celebrates Indian heritage through authentic dance, music, and storytelling.</p>
+      <div className="w-full">
         {/* Case Studies Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Sidebar - Case Study List */}
@@ -111,7 +112,7 @@ const CaseStudy = () => {
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                   {selectedCase.title}
                 </h3>
-                <p className="text-sm text-gray-500">Read time - 3 min</p>
+                <p className="text-sm text-gray-500">Read time - {readTime} min</p>
               </div>
               <div className="prose prose-gray max-w-none">
                 {selectedCase.content.split("\n\n").map((paragraph, index) => (

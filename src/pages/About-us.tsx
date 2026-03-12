@@ -60,7 +60,7 @@ const About = () => {
   return (
     <div
       id="about-us"
-      className="mx-auto flex flex-col max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 sm:py-20 md:py-24 lg:py-10"
+      className="mx-auto flex flex-col max-w-7xl px-4 sm:px-6 lg:px-8 sm:py-20 md:py-24 lg:py-10"
     >
       {/* Header Section */}
       <div
