@@ -44,9 +44,6 @@ function MediaCard({
   return (
     <div
       className={`relative ${baseHeight} overflow-hidden transition-all duration-500 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-      style={{
-        transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
-      }}
     >
       <Image
         src={url}
@@ -146,43 +143,9 @@ function Media() {
   const [images, setImages] = useState<string[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
-  const [isGridVisible, setIsGridVisible] = useState(false);
+  const [deletingCurrent, setDeletingCurrent] = useState(false);
 
-  const headerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
-    };
-
-    const headerObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsHeaderVisible(true);
-        }
-      });
-    }, observerOptions);
-
-    const gridObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsGridVisible(true);
-        }
-      });
-    }, observerOptions);
-
-    if (headerRef.current) headerObserver.observe(headerRef.current);
-    if (gridRef.current) gridObserver.observe(gridRef.current);
-
-    return () => {
-      headerObserver.disconnect();
-      gridObserver.disconnect();
-    };
-  }, []);
+  const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   useEffect(() => {
     async function init() {
@@ -203,6 +166,15 @@ function Media() {
     init();
   }, []);
 
+  useEffect(() => {
+    if (images.length === 0) return;
+    thumbnailRefs.current[currentIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [currentIndex, images.length]);
+
   function handleDelete(url: string) {
     setImages((prev) => prev.filter((img) => img !== url));
     setCurrentIndex((idx) => Math.max(0, Math.min(idx, images.length - 2)));
@@ -213,6 +185,27 @@ function Media() {
     setCurrentIndex(images.length); // move to newly added
   }
 
+  async function handleDeleteCurrent() {
+    if (images.length === 0) return;
+    if (!confirm("Remove this image?")) return;
+
+    setDeletingCurrent(true);
+    try {
+      const targetUrl = images[currentIndex];
+      const res = await fetch("/api/admin/media/upload", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: targetUrl }),
+      });
+      if (res.ok) handleDelete(targetUrl);
+      else alert("Failed to delete image");
+    } catch {
+      alert("Network error");
+    } finally {
+      setDeletingCurrent(false);
+    }
+  }
+
   const showPlaceholders = images.length === 0;
 
   return (
@@ -220,30 +213,7 @@ function Media() {
       id="media"
       className="w-full max-w-7xl px-4 sm:px-6 md:px-8 mx-auto py-8 sm:py-10"
     >
-      {/* <div
-        ref={headerRef}
-        className={`transition-all duration-700 ease-out ${isHeaderVisible
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-8"
-          }`}
-      >
-        <p className="text-sm md:text-base text-gray-700">
-          Shivaleela Cultural Trust boasts a dedicated team of professional
-          artists with over 12 years of national and international stage
-          excellence. Led by our visionary founder and supported by esteemed
-          board members, each performer brings specialized mastery in
-          Bharatanatyam, Kathak, Yakshagana, and folk forms. Our choreographers
-          craft innovative productions like Punyakoti and Jai Jaganmathe,
-          blending tradition with fresh storytelling. Highly trained dancers
-          ensure every mudra and expression resonates deeply with audiences.
-          This talented collective not only performs but mentors the next
-          generation through Abhyasa classes. Their credentials—prestigious
-          festival appearances and critical acclaim—build unbreakable trust.
-          Meet the faces behind the footwork that captivates rasikas worldwide.
-        </p>
-      </div> */}
-
-      <div ref={gridRef} className="w-full">
+      <div className="w-full">
         {loading ? (
           <div className="flex justify-center py-16 sm:py-20">
             <Loader2
@@ -276,6 +246,7 @@ function Media() {
                     onClick={() => setCurrentIndex((i) => (i - 1 + images.length) % images.length)}
                     className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg"
                     title="Previous"
+                    aria-label="Previous image"
                   >
                     <ArrowLeft size={18} />
                   </button>
@@ -283,6 +254,7 @@ function Media() {
                     onClick={() => setCurrentIndex((i) => (i + 1) % images.length)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg"
                     title="Next"
+                    aria-label="Next image"
                   >
                     <ArrowRight size={18} />
                   </button>
@@ -291,26 +263,17 @@ function Media() {
                   {isAdmin && (
                     <div className="absolute top-3 right-3">
                       <button
-                        onClick={() => {
-                          if (!confirm("Remove this image?")) return;
-                          (async () => {
-                            try {
-                              const res = await fetch("/api/admin/media/upload", {
-                                method: "DELETE",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ url: images[currentIndex] }),
-                              });
-                              if (res.ok) handleDelete(images[currentIndex]);
-                              else alert("Failed to delete image");
-                            } catch {
-                              alert("Network error");
-                            }
-                          })();
-                        }}
+                        onClick={handleDeleteCurrent}
+                        disabled={deletingCurrent}
                         className="bg-primary/90 text-white rounded-full p-2 shadow-lg"
                         title="Remove image"
+                        aria-label="Remove current image"
                       >
-                        <Trash2 size={16} />
+                        {deletingCurrent ? (
+                          <Loader2 size={16} className="animate-spin" />
+                        ) : (
+                          <Trash2 size={16} />
+                        )}
                       </button>
                     </div>
                   )}
@@ -321,14 +284,18 @@ function Media() {
             {/* Thumbnails row */}
             <div className="flex items-center gap-4">
               <div className="flex-1 overflow-x-auto">
-                <div className="flex gap-3 pb-2">
+                <div className="flex items-start gap-3 pb-2">
                   {!showPlaceholders &&
                     images.map((url, i) => (
-                      <div
+                      <button
                         key={url}
+                        ref={(el) => {
+                          thumbnailRefs.current[i] = el;
+                        }}
                         onClick={() => setCurrentIndex(i)}
-                        className={`cursor-pointer rounded-md ring-2 ${i === currentIndex ? "ring-primary" : "ring-transparent"} overflow-hidden`}
-                        style={{ minWidth: 112 }}
+                        className={`cursor-pointer rounded-md ring-2 ${i === currentIndex ? "ring-primary" : "ring-transparent"} overflow-hidden min-w-28 focus:outline-none focus:ring-primary focus:ring-2`}
+                        aria-label={`Show media image ${i + 1}`}
+                        aria-current={i === currentIndex}
                       >
                         <MediaCard
                           url={url}
@@ -338,7 +305,7 @@ function Media() {
                           isVisible={true}
                           small
                         />
-                      </div>
+                      </button>
                     ))}
 
                   {isAdmin && (

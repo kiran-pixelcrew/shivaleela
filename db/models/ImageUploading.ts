@@ -1,18 +1,21 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-const imageUploadSchema = new mongoose.Schema({
+const imageUploadSchema = new mongoose.Schema(
+  {
     imageUrl: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     uploadedAt: {
-        type: Date,
-        default: Date.now
-    }
-}, {
-    timestamps: true
-})
+      type: Date,
+      default: Date.now,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
 
-const ImageUpload = mongoose.model("ImageUpload", imageUploadSchema)
+const ImageUpload = mongoose.model("ImageUpload", imageUploadSchema);
 
-export default ImageUpload
+export default ImageUpload;

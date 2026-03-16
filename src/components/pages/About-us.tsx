@@ -79,9 +79,9 @@ const About = () => {
           }`}
       >
         <p className="text-base sm:text-lg md:text-base text-justify text-gray-700 leading-relaxed max-w-full">
-          Founded in 2013 by Kum. M.S. Shantala—our visionary President and guru—Shivaleela Natyalaya began as a sanctuary for Bharatanatyam and Indian classical arts. Evolving into Shivaleela Cultural Trust in 2014, we educate children in dance, music, and culture, prioritizing those who can&apos;t afford it.
-          Non-commercial at heart, we nurture talent, stage enchanting performances, and collaborate with event organizers, artists, and communities in Bengaluru. Join our timeless journey—affordable classes, inclusive productions, pure passion.
-          Discover Bharatanatyam classes Bengaluru | Indian classical dance trust.
+          Founded by visionary <span className="font-bold">Kum. M.S. Shantala</span> President and master guru—Shivaleela Natyalaya began as Bengaluru&apos;s sanctuary for Bharatanatyam and Indian classical arts. Evolving into Shivaleela Cultural Trust in 2014, we educate children in dance, music, and culture—prioritizing those who can&apos;t afford it. Non-commercial at heart, we nurture raw talent, stage captivating performances, and partner with event organizers, artists, and communities. From affordable Bharatanatyam classes to inclusive workshops, our passion creates cultural bridges.
+        </p>
+        <p>
         </p>
       </div>
 
@@ -112,13 +112,13 @@ const About = () => {
               Kum. MS Shantala
             </h2>
             <p className="text-sm md:text-base font-semibold text-gray-600 italic">
-              Founder, President & Master Guru.
+              Founder, Director - Shivaleela Natyalaya
             </p>
           </div>
 
           <div className="text-gray-700 text-sm md:text-base text-balance">
             <p>
-              Iconic Kannada actress turned dance visionary Kum. M.S. Shantala starred in 18+ films, debuting with Paduvarahalli Pandavaru alongside Ambareesh under Puttanna Kanagal. Trained by gurus like Vidushi Narmada and Udupi Lakshminarayanacharya, she promotes Bharatanatyam globally in Singapore, USA, and Dubai. Blending cinema, art, and Indian culture, she now inspires the next generation through Shivaleela.
+              Iconic Kannada actress turned dance visionary <span className="font-bold">Kum. M.S. Shantala</span> starred in 18+ films, debuting with Paduvarahalli Pandavaru alongside Ambareesh under Puttanna Kanagal. Trained by gurus like Vidushi Narmada and Udupi Lakshminarayanacharya, she promotes Bharatanatyam globally in Singapore, USA, and Dubai. Blending cinema, art, and Indian culture, she now inspires the next generation through Shivaleela.
             </p>
             {/* <Button className="mt-4 bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">
               Discover Her Journey
@@ -154,7 +154,7 @@ const About = () => {
               Smt. Parimala Subodh
             </h2>
             <p className="text-sm md:text-base font-semibold text-gray-600 italic">
-              Artistic Director & Co-Founder.
+              Co-founder, Artistic Director - Shivaleela Natyalaya
             </p>
           </div>
 

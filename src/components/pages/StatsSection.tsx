@@ -63,8 +63,8 @@ function StatsSection() {
         {[
           { label: "Students Trained", value: "1500+", colorClass: "text-secondary" },
           { label: "Core Team", value: "45+", colorClass: "text-primary" },
-          { label: "Productions", value: "5+", colorClass: "text-secondary" },
-          { label: "Countries", value: "13+", colorClass: "text-primary" },
+          { label: "Productions", value: "6+", colorClass: "text-secondary" },
+          { label: "Countries", value: "8+", colorClass: "text-primary" },
         ].map((stat, index) => (
           <div
             key={index}
