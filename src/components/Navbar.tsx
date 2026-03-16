@@ -5,6 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Playfair } from 'next/font/google';
+
+const playfair = Playfair({
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-playfair',
+  subsets: ['latin'],
+});
 
 const Navbar = () => {
   const pathname = usePathname() || '';
@@ -188,8 +195,9 @@ const Navbar = () => {
     },
   ];
   return (
-    <nav aria-label="Primary navigation">
+    <nav aria-label="Primary navigation menu">
       <div
+        style={{ fontFamily: playfair.style.fontFamily }}
         className={`fixed top-0 z-50 h-24 w-full border-b border-gray-50/20 bg-white shadow-xl backdrop-blur-md transition-all duration-300 will-change-transform ${hidden ? 'pointer-events-none -translate-y-28 opacity-0' : 'translate-y-0 opacity-100'}`}
       >
         <div className="flex h-full items-center justify-between px-4 md:px-8">
@@ -278,13 +286,13 @@ const Navbar = () => {
                   key={link.name}
                   href={link.link}
                   onClick={handleClick}
-                  className={`relative cursor-pointer font-bold transition-all duration-300 ease-out hover:text-primary focus:text-primary focus:outline-none ${isActive
+                  className={`relative cursor-pointer font-bold text-xl transition-all duration-300 ease-out hover:text-primary focus:text-primary focus:outline-none ${isActive
                     ? 'scale-105 text-primary'
                     : 'text-secondary hover:scale-105'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  <span className="relative z-10">{link.name}</span>
+                  <span className="relative z-10 ">{link.name}</span>
                 </Link>
               );
             })}
@@ -381,9 +389,10 @@ const Navbar = () => {
                 key={link.name}
                 href={link.link}
                 onClick={handleMobileClick}
-                className={`group relative text-4xl font-bold transition-all duration-300 ease-out ${isActive ? 'text-primary' : 'text-[#f8f8f8]'
+                className={`group relative text-5xl font-bold transition-all duration-300 ease-out ${isActive ? 'text-primary' : 'text-[#f8f8f8]'
                   }`}
                 style={{
+                  fontFamily: playfair.style.fontFamily,
                   transitionDelay: mobileMenuOpen ? `${index * 50}ms` : '0ms',
                 }}
                 aria-current={isActive ? 'page' : undefined}

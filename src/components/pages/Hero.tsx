@@ -69,18 +69,15 @@ export default function Hero() {
           </span>{' '}
           captivating stories in Bharatanatyam and beyond. Join the dance & Musical celebrations!
         </p>
-        <div className="flex flex-col w-full md:w-auto sm:flex-row items-center justify-center gap-4">
-          <Button className="w-full py-6 font-bold text-base" variant={'default'} size={'sm'}>
+        <div className="flex flex-col w-full md:max-w-md sm:flex-row items-center justify-center gap-4">
+          <Button className="w-full py-6 font-bold text-base" variant={'default'}>
             Enroll Classes
-          </Button>
-          <Button className="w-full py-6 font-bold text-base" variant={'outline'}>
-            Book a Performance
           </Button>
         </div>
       </div>
       <div className="bg-black text-white h-10 mt-4 py-10 hidden md:flex items-center justify-center text-sm md:text-base">
         <p className="">
-          Welcome to the &nbsp;<span className="text-yellow-400">Kalaatatpha - 2025</span>&nbsp;kannada dance drama production! Join us on 14th & 28th to celebrate!&nbsp; <span className="text-yellow-400">Click here for Tickets.</span>
+          <span className="font-bold text-yellow-300">Admissions Open Now!</span> Bharatanatyam - Kathak - Hindustani Music - Carnatic Music for the year 2026-27! Contact <span className="font-bold text-yellow-300">+91 97439 00990</span>
         </p>
       </div>
     </section>
