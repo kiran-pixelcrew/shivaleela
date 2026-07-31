@@ -23,3 +23,60 @@ export function parseInstagramPermalink(input: string): string | null {
     return `https://www.instagram.com/${match[1]}/${match[2]}/`;
   }
 }
+
+export function permalinkToEmbedUrl(permalink: string): string {
+  return `${permalink.replace(/\/?$/, "/")}embed/`;
+}
+
+export function truncateCaption(text: string, maxLength = 120): string {
+  const cleaned = text.replace(/\s+/g, " ").trim();
+  if (cleaned.length <= maxLength) return cleaned;
+  return `${cleaned.slice(0, maxLength).trimEnd()}…`;
+}
+
+export interface InstagramPostPreview {
+  permalink: string;
+  thumbnailUrl: string | null;
+  caption: string | null;
+}
+
+interface OEmbedResponse {
+  thumbnail_url?: string;
+  title?: string;
+  author_name?: string;
+  error?: { message: string };
+}
+
+export async function fetchInstagramPostPreview(
+  permalink: string,
+): Promise<InstagramPostPreview> {
+  const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN?.trim();
+
+  if (accessToken) {
+    try {
+      const url = new URL("https://graph.facebook.com/v21.0/instagram_oembed");
+      url.searchParams.set("url", permalink);
+      url.searchParams.set("access_token", accessToken);
+      url.searchParams.set("omitscript", "true");
+
+      const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
+      const data = (await res.json()) as OEmbedResponse;
+
+      if (res.ok) {
+        return {
+          permalink,
+          thumbnailUrl: data.thumbnail_url ?? null,
+          caption: data.title ? truncateCaption(data.title) : null,
+        };
+      }
+    } catch {
+      // Fall through to basic preview.
+    }
+  }
+
+  return {
+    permalink,
+    thumbnailUrl: null,
+    caption: null,
+  };
+}

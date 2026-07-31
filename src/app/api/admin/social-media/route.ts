@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 import type { Document, Filter, UpdateFilter } from "mongodb";
+import {
+  fetchInstagramPostPreview,
+  parseInstagramPermalink,
+} from "@/lib/instagram";
 import { getDb, SITE_COLLECTION, SITE_DOC_ID } from "@/lib/mongodb";
-import { parseInstagramPermalink } from "@/lib/instagram";
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 
@@ -38,7 +41,13 @@ export async function GET() {
     .collection(SITE_COLLECTION)
     .findOne(siteFilter, { projection: { socialMediaPosts: 1 } });
 
-  return NextResponse.json({ posts: doc?.socialMediaPosts ?? [] });
+  const permalinks: string[] = doc?.socialMediaPosts ?? [];
+
+  const posts = await Promise.all(
+    permalinks.map((permalink) => fetchInstagramPostPreview(permalink)),
+  );
+
+  return NextResponse.json({ posts });
 }
 
 export async function POST(req: NextRequest) {
@@ -82,7 +91,9 @@ export async function POST(req: NextRequest) {
     .collection(SITE_COLLECTION)
     .updateOne(siteFilter, pushSocialPostUpdate(permalink), { upsert: true });
 
-  return NextResponse.json({ success: true, url: permalink });
+  const preview = await fetchInstagramPostPreview(permalink);
+
+  return NextResponse.json({ success: true, url: permalink, post: preview });
 }
 
 export async function DELETE(req: NextRequest) {
