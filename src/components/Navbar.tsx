@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Loader2, LogOut, Menu, X } from 'lucide-react';
 import { Playfair } from 'next/font/google';
 
 const playfair = Playfair({
@@ -18,6 +18,8 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
   const lastYRef = useRef(0);
   const rAFRef = useRef<number | null>(null);
   const hiddenRef = useRef(hidden);
@@ -27,6 +29,37 @@ const Navbar = () => {
   useEffect(() => {
     hiddenRef.current = hidden;
   }, [hidden]);
+
+  useEffect(() => {
+    async function checkAdminSession() {
+      try {
+        const res = await fetch('/api/admin/verify');
+        if (!res.ok) {
+          setIsAdmin(false);
+          return;
+        }
+        const { valid } = await res.json();
+        setIsAdmin(valid === true);
+      } catch {
+        setIsAdmin(false);
+      }
+    }
+
+    checkAdminSession();
+  }, [pathname]);
+
+  async function handleLogout() {
+    setLoggingOut(true);
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' });
+      setIsAdmin(false);
+      setMobileMenuOpen(false);
+      window.location.href = '/';
+    } catch {
+      alert('Failed to log out. Please try again.');
+      setLoggingOut(false);
+    }
+  }
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -296,6 +329,22 @@ const Navbar = () => {
                 </Link>
               );
             })}
+            {isAdmin && (
+              <button
+                type="button"
+                onClick={handleLogout}
+                disabled={loggingOut}
+                className="flex items-center gap-2 font-bold text-xl text-stone-500 transition-all duration-300 ease-out hover:text-primary disabled:opacity-50"
+                aria-label="Log out of admin session"
+              >
+                {loggingOut ? (
+                  <Loader2 size={18} className="animate-spin" />
+                ) : (
+                  <LogOut size={18} />
+                )}
+                Log Out
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -406,6 +455,26 @@ const Navbar = () => {
               </Link>
             );
           })}
+          {isAdmin && (
+            <button
+              type="button"
+              onClick={handleLogout}
+              disabled={loggingOut}
+              className="flex items-center gap-3 text-3xl font-bold text-stone-300 transition-all duration-300 ease-out hover:text-primary disabled:opacity-50"
+              style={{
+                fontFamily: playfair.style.fontFamily,
+                transitionDelay: mobileMenuOpen ? `${navLinks.length * 50}ms` : '0ms',
+              }}
+              aria-label="Log out of admin session"
+            >
+              {loggingOut ? (
+                <Loader2 size={28} className="animate-spin" />
+              ) : (
+                <LogOut size={28} />
+              )}
+              Log Out
+            </button>
+          )}
         </div>
       </div>
     </nav>
