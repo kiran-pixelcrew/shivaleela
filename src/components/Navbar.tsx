@@ -223,6 +223,10 @@ const Navbar = () => {
       link: '/#gallery',
     },
     {
+      name: 'Social Media',
+      link: '/#social-media',
+    },
+    {
       name: 'Contact',
       link: '/#contact',
     },

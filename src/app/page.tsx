@@ -10,6 +10,7 @@ import Classes from "@/components/pages/Classes";
 import Gallery from "@/components/pages/Gallery";
 import FAQ from "@/components/pages/FAQ";
 import Contact from "@/components/pages/Contact";
+import SocialMedia from "@/components/pages/SocialMedia";
 
 function page() {
   return (
@@ -28,6 +29,8 @@ function page() {
       <Gallery />
       <SectionSeparator title="Media" subtitle="Echoes of Applause: Our Dance in the Spotlight" id="media" />
       <Media />
+      <SectionSeparator title="Social Media" subtitle="Moments From Our Stage, Shared on Instagram" id="social-media" />
+      <SocialMedia />
       <SectionSeparator title="FAQs" subtitle="Your Questions, Our Answers: Everything You Want to Know" id="faq" />
       <FAQ />
       <SectionSeparator title="Connect With Us" subtitle="Join the Dance of Connection: Follow Us on Social Media" id="contact" className="text-center" />
