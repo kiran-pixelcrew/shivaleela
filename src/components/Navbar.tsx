@@ -234,8 +234,13 @@ const Navbar = () => {
   return (
     <nav aria-label="Primary navigation menu">
       <div
-        style={{ fontFamily: playfair.style.fontFamily }}
-        className={`fixed top-0 z-50 h-24 w-full border-b border-gray-50/20 bg-white shadow-xl backdrop-blur-md transition-all duration-300 will-change-transform ${hidden ? 'pointer-events-none -translate-y-28 opacity-0' : 'translate-y-0 opacity-100'}`}
+        className={`fixed top-[var(--announcement-h,0px)] z-50 h-24 w-full border-b border-gray-50/20 bg-white shadow-xl backdrop-blur-md transition-all duration-300 will-change-transform ${hidden ? 'pointer-events-none opacity-0' : 'opacity-100'}`}
+        style={{
+          fontFamily: playfair.style.fontFamily,
+          transform: hidden
+            ? 'translateY(calc(-100% - var(--announcement-h, 0px)))'
+            : 'translateY(0)',
+        }}
       >
         <div className="flex h-full items-center justify-between px-4 md:px-8">
           <div className="flex items-center text-xl md:ml-14 font-bold text-secondary md:text-2xl">
