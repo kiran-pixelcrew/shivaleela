@@ -12,7 +12,7 @@ const notoSerifKannada = Noto_Serif_Kannada({
 const STORAGE_KEY = "sirigannadam-gelge-banner-dismissed";
 const TICKET_URL = "https://www.theticket9.com/event/siri-gannadam-gelge";
 const BANNER_TEXT =
-  "🎟️ ಸೀಟುಗಳು ಭರ್ತಿಯಾಗುತ್ತಿವೆ! | Seats Filling Fast! — Book Your Tickets for Sirigannadam Gelge | 16th August 2026";
+  "🎟️ Seats Filling Fast! — Book Your Tickets for Sirigannadam Gelge | 16th August 2026";
 
 export default function AnnouncementBanner() {
   const [mounted, setMounted] = useState(false);
