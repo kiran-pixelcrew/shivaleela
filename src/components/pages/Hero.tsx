@@ -38,7 +38,7 @@ const mobileImages: StaticImageData[] = [mImg0, mImg1, mImg2, mImg3, mImg4, mImg
 
 export default function Hero() {
   return (
-    <section aria-label="Hero Section" className="flex mt-24 flex-col w-full min-h-[calc(20vh-100px)] md:min-h-[calc(100vh-100px)]">
+    <section aria-label="Hero Section" className="flex mt-[calc(6rem+var(--announcement-h,0px))] flex-col w-full min-h-[calc(20vh-100px)] md:min-h-[calc(100vh-100px)]">
       {/* Top Carousel Section */}
       <div className="relative w-full overflow-hidden hidden md:block md:h-[400px] shrink-0">
         <HeroSectionBgCarousel

@@ -53,6 +53,7 @@ body {
 
 :root {
   --radius: 0.625rem;
+  --announcement-h: 0px;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -136,4 +137,83 @@ body {
   font-family: var(--font-playfair), serif;
   font-weight: 400;
   font-style: normal;
+}
+
+@keyframes announcement-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes announcement-shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+.announcement-marquee {
+  animation: announcement-marquee 22s linear infinite;
+  will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .announcement-marquee {
+    animation-duration: 28s;
+  }
+}
+
+.announcement-shimmer {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 28%,
+    #ffe9a8 48%,
+    #ffffff 58%,
+    #ffffff 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: #ffffff;
+  -webkit-text-fill-color: transparent;
+  animation: announcement-shimmer 3.5s linear infinite;
+  /* Kannada glyphs need room above/below the em box */
+  padding-block: 0.15em;
+  line-height: 1.45;
+}
+
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12px,
+    #000 calc(100% - 12px),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12px,
+    #000 calc(100% - 12px),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-marquee,
+  .announcement-shimmer {
+    animation: none;
+  }
+
+  .announcement-shimmer {
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+    background: none;
+  }
 }

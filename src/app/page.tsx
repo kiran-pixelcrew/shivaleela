@@ -10,10 +10,12 @@ import Classes from "@/components/pages/Classes";
 import Gallery from "@/components/pages/Gallery";
 import FAQ from "@/components/pages/FAQ";
 import Contact from "@/components/pages/Contact";
+import AnnouncementBanner from "@/components/AnnouncementBanner";
 
 function page() {
   return (
     <div className="">
+      <AnnouncementBanner />
       <Navbar />
       <Hero />
       <SectionSeparator title="Shivaleela Natyalaya: Our Story" subtitle="Preserving Culture Through Dance & Music Since 2013" id="about-us" />
